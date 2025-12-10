@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { api } from '../axios';
+import { getApi } from '../axios';
 import { ExtraArgument } from './thunk/types';
 import { OffersSliceState } from './slice/offers/state';
 import { CitiesSliceState } from './slice/cities/state';
@@ -8,6 +8,8 @@ import { ErrorSliceState } from './slice/error/state';
 import { AuthSliceState } from './slice/auth/state';
 import { reducer } from './reducer';
 import { addTokenInterceptor } from './utils/axios';
+
+const api = getApi();
 
 addTokenInterceptor(api);
 

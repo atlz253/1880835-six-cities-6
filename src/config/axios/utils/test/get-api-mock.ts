@@ -1,6 +1,6 @@
 import AxiosMockAdapter from 'axios-mock-adapter';
-import { api } from '../..';
+import axios from 'axios';
 
 export function getApiMock() {
-  return new AxiosMockAdapter(api);
+  return new AxiosMockAdapter(axios);
 }
