@@ -1,4 +1,4 @@
-import citiesMocks from '../../city/mocks/cities-mocks';
+import { getCitiesMock } from '../../city/mocks/get-cities-mocks';
 import { getUserMock } from '../../user/mocks/get-user-mock';
 import { OfferDetails } from '../types';
 
@@ -8,7 +8,7 @@ export function getOfferDetailsMock(): OfferDetails {
     title: 'Offer',
     type: 'apartment',
     price: 1000,
-    city: citiesMocks.Paris,
+    city: getCitiesMock().Paris,
     location: {
       latitude: 0,
       longitude: 0,

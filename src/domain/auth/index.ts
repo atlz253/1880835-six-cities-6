@@ -1,1 +1,1 @@
-export { useAuthStatus } from './hooks/useAuthStatus';
+export { useAuthStatus } from './hooks/use-auth-status';

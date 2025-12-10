@@ -2,8 +2,9 @@ import { createSelector } from '@reduxjs/toolkit';
 import { State } from '../..';
 import { OfferDetails, OfferMeta } from '../../../../domain/offer';
 import { getEmptyQueryState, ThunkQuery } from '../../thunk';
+import { OffersSliceState } from './state';
 
-export const selectOffersState = (s: State) => s.offers;
+export const selectOffersState = (s: { offers: OffersSliceState }) => s.offers;
 
 export const selectOffersQuery = createSelector(
   [selectOffersState],

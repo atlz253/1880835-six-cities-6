@@ -4,14 +4,14 @@ import { Map } from '../domain/map';
 import { useMemo, useState } from 'react';
 import { Navbar } from '../domain/city/components/Navbar';
 import { useOffersQuery } from '../domain/offer';
-import { useCurrentCityFromParams } from '../domain/city/hooks/useCurrentCityFromParams';
-import { useCurrentCity } from '../domain/city/hooks/useCurrentCity';
+import { useCurrentCityFromParams } from '../domain/city/hooks/use-current-city-from-params';
+import { useCurrentCity } from '../domain/city/hooks/use-current-city';
 import { Loader } from '../domain/ui/components/Loader';
 import { Navigate } from 'react-router-dom';
 import routes from '../domain/router/constants/ROUTES';
 import CityOffers from '../domain/offer/components/CityOffers';
 import { setErrorMessage } from '../domain/error/features/setErrorMessage';
-import { useAuthCheck } from '../domain/auth/hooks/useAuthCheck';
+import { useAuthCheck } from '../domain/auth/hooks/use-auth-check';
 
 export function Main() {
   useAuthCheck();

@@ -5,7 +5,7 @@ import { Loader } from '../domain/ui/components/Loader';
 import { Link, Navigate } from 'react-router-dom';
 import routes from '../domain/router/constants/ROUTES';
 import { setErrorMessage } from '../domain/error/features/setErrorMessage';
-import { useAuthCheck } from '../domain/auth/hooks/useAuthCheck';
+import { useAuthCheck } from '../domain/auth/hooks/use-auth-check';
 
 export function Favorites() {
   useAuthCheck();

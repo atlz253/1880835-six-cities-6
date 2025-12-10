@@ -1,18 +1,12 @@
 import { City } from '../../../../domain/city';
+import defaultCity from '../../../../domain/city/constants/default-city';
 
 interface CitiesSliceState {
   currentCity: City;
 }
 
 const getEmptyState = (): CitiesSliceState => ({
-  currentCity: {
-    name: 'Paris',
-    location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
-      zoom: 13,
-    },
-  },
+  currentCity: defaultCity,
 });
 
 export { getEmptyState };

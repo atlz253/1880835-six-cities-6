@@ -4,7 +4,7 @@ import { Comment } from '../types';
 import { createOnChangeHandler } from '../../../utils/react/form/createOnChangeHandler';
 import { postComment } from '../features/postComment';
 import { preventDefault } from '../../../utils/event';
-import { useCommentPostQuery } from '../hooks/useCommentPostQuery';
+import { useCommentPostQuery } from '../hooks/use-comment-post-query';
 import {
   isNotFoundError,
   isUnauthorizedError,

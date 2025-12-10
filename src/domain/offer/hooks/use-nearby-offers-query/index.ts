@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../config/redux/hooks/useAppDispatch';
-import { nearbyOffersThunk } from '../../../config/redux/slice/offers';
-import { selectNearbyOffers } from '../../../config/redux/slice/offers/selector';
-import { ThunkQuery } from '../../../config/redux/thunk/types';
-import { OfferMeta } from '../types';
-import { State } from '../../../config/redux';
+import { useAppDispatch } from '../../../../config/redux/hooks/useAppDispatch';
+import { nearbyOffersThunk } from '../../../../config/redux/slice/offers';
+import { selectNearbyOffers } from '../../../../config/redux/slice/offers/selector';
+import { ThunkQuery } from '../../../../config/redux/thunk/types';
+import { OfferMeta } from '../../types';
+import { State } from '../../../../config/redux';
 import { useEffect, useMemo } from 'react';
 
 export function useNearbyOffersQuery({

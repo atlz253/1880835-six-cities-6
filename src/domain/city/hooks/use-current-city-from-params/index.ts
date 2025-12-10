@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useCurrentCity } from './useCurrentCity';
-import { useCitiesQuery } from './useCitiesQuery';
-import { setCurrentCity } from '../features/setCurrentCity';
-import ROUTES from '../../router/constants/ROUTES';
+import { useCurrentCity } from '../use-current-city';
+import { useCitiesQuery } from '../use-cities-query';
+import { setCurrentCity } from '../../features/setCurrentCity';
+import ROUTES from '../../../router/constants/ROUTES';
 
 export function useCurrentCityFromParams() {
   const { city: cityParamsName } = useParams<{ city: string | undefined }>();
@@ -11,7 +11,7 @@ export function useCurrentCityFromParams() {
   const currentCity = useCurrentCity();
   const navigate = useNavigate();
   useEffect(() => {
-    const cityParams = cities.find((c) => c.name === cityParamsName);
+    const cityParams = cities?.find((c) => c.name === cityParamsName);
     if (cityParams !== undefined) {
       if (currentCity?.name !== cityParams.name) {
         setCurrentCity(cityParams);

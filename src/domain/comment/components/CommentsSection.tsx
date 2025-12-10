@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { CommentForm } from './CommentForm';
 import { CommentsList } from './comments-list';
-import { useOfferCommentsQuery } from '../hooks/useOfferCommentsQuery';
+import { useOfferCommentsQuery } from '../hooks/use-offer-comments-query';
 import { Loader } from '../../ui/components/Loader';
 import { ReactNode } from 'react';
 import { useAuthStatus } from '../../auth';

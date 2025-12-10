@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css';
 
 import { useRef } from 'react';
-import { useMap } from './hooks/useMap';
+import { useMap } from './hooks/use-map';
 import { Position } from './types';
 import classNames from 'classnames';
 

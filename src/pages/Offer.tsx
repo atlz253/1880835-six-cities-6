@@ -7,10 +7,10 @@ import offerRatingClassNames from '../domain/offer/constants/offerRatingClassNam
 import { CommentsSection } from '../domain/comment/components/CommentsSection';
 import { Map } from '../domain/map';
 import { Loader } from '../domain/ui/components/Loader';
-import { useOfferQuery } from '../domain/offer/hooks/useOfferQuery';
-import { useNearbyOffersQuery } from '../domain/offer/hooks/useNearbyOffersQuery';
+import { useOfferQuery } from '../domain/offer/hooks/use-offer-query';
+import { useNearbyOffersQuery } from '../domain/offer/hooks/use-nearby-offers-query';
 import { setErrorMessage } from '../domain/error/features/setErrorMessage';
-import { useAuthCheck } from '../domain/auth/hooks/useAuthCheck';
+import { useAuthCheck } from '../domain/auth/hooks/use-auth-check';
 import ERROR_TYPES from '../config/redux/thunk/constants/ERROR_TYPES';
 import CardList from '../domain/offer/components/CardList';
 import { useAuthStatus } from '../domain/auth';

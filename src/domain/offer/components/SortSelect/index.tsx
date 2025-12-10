@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Select } from '../../../ui/hooks/useSelect';
+import { Select } from '../../../ui/hooks/use-select';
 
 export function SortSelect({ select }: { select: Select }) {
   return (

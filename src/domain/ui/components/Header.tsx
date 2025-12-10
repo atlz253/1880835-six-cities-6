@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 import routes from '../../router/constants/ROUTES';
-import { useAuthStatus } from '../../auth/hooks/useAuthStatus';
+import { useAuthStatus } from '../../auth/hooks/use-auth-status';
 import { preventDefault } from '../../../utils/event';
 import { signOut } from '../../auth/features/signOut';
 import ROUTES from '../../router/constants/ROUTES';
-import { useAuthQuery } from '../../auth/hooks/useAuthQuery';
-import { useFavoriteOffersQuery } from '../../offer/hooks/useFavoriteOffersQuery';
+import { useAuthQuery } from '../../auth/hooks/use-auth-query';
+import { useFavoriteOffersQuery } from '../../offer/hooks/use-favorite-offers-query';
 
 export function Header() {
   const { data } = useAuthQuery();
