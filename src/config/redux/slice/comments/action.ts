@@ -10,10 +10,12 @@ import ACTION_NAMES from './constants/ACTION_NAMES';
 import { AxiosError } from 'axios';
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
+import { CommentsSliceState } from './state';
 
 export const offerCommentsThunk = createAppAsyncThunk<
   PostedComment[],
-  string | undefined
+  string | undefined,
+  { comments: CommentsSliceState }
 >(
   ACTION_NAMES.offerComments,
   async (offerID: string | undefined, { rejectWithValue, extra: { api } }) => {

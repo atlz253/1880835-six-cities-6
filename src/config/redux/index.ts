@@ -1,11 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { getApi } from '../axios';
 import { ExtraArgument } from './thunk/types';
-import { OffersSliceState } from './slice/offers/state';
-import { CitiesSliceState } from './slice/cities/state';
-import { CommentsSliceState } from './slice/comments/state';
-import { ErrorSliceState } from './slice/error/state';
-import { AuthSliceState } from './slice/auth/state';
 import { reducer } from './reducer';
 import { addTokenInterceptor } from './utils/axios';
 
@@ -21,13 +16,7 @@ const store = configureStore({
     }),
 });
 
-interface State {
-  auth: AuthSliceState;
-  error: ErrorSliceState;
-  offers: OffersSliceState;
-  cities: CitiesSliceState;
-  comments: CommentsSliceState;
-}
+type State = ReturnType<typeof store.getState>;
 
 type AppDispatch = typeof store.dispatch;
 

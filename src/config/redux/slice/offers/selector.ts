@@ -37,7 +37,7 @@ export const selectNearbyOffers = createSelector(
       : getEmptyQueryState<OfferMeta[]>()
 );
 
-export const selectFavoriteOffersState = (s: State) =>
+export const selectFavoriteOffersState = (s: { offers: OffersSliceState }) =>
   selectOffersState(s).favoriteOffers;
 
 export const selectFavoriteOffers = createSelector(
@@ -46,5 +46,6 @@ export const selectFavoriteOffers = createSelector(
     favoriteOffers ? favoriteOffers : getEmptyQueryState<OfferMeta[]>()
 );
 
-export const selectFavoriteOfferChangeState = (s: State) =>
-  s.offers.favoriteOfferChangeState;
+export const selectFavoriteOfferChangeState = (s: {
+  offers: OffersSliceState;
+}) => s.offers.favoriteOfferChangeState;

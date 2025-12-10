@@ -1,4 +1,3 @@
-import { State } from '..';
 import { getApi } from '../../axios';
 
 export interface ExtraArgument {
@@ -16,7 +15,7 @@ export interface RejectValue {
   cause?: Partial<SerializedError>;
 }
 
-export interface ThunkConfig {
+export interface ThunkConfig<State> {
   state: State;
   rejectValue: RejectValue;
   extra: { api: ReturnType<typeof getApi> };

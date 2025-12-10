@@ -12,6 +12,7 @@ import {
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
 import LOCAL_STORAGE from './constants/local-storage';
+import { AuthSliceState } from './state';
 
 export const signOutThunk = createAppAsyncThunk<void>(
   ACTION_NAMES.signOut,
@@ -21,7 +22,11 @@ export const signOutThunk = createAppAsyncThunk<void>(
   }
 );
 
-export const checkLoginThunk = createAppAsyncThunk<Auth | undefined>(
+export const checkLoginThunk = createAppAsyncThunk<
+  Auth | undefined,
+  void,
+  { auth: AuthSliceState }
+>(
   ACTION_NAMES.loginCheck,
   async (_, { rejectWithValue, getState, dispatch, extra: { api } }) => {
     const token = selectAuthToken(getState());

@@ -15,8 +15,14 @@ import {
   selectFavoriteOfferChangeState,
   selectFavoriteOffersState,
 } from './selector';
+import { OffersSliceState } from './state';
+import { AuthSliceState } from '../auth/state';
 
-export const offersThunk = createAppAsyncThunk<OfferMeta[]>(
+export const offersThunk = createAppAsyncThunk<
+  OfferMeta[],
+  void,
+  { offers: OffersSliceState }
+>(
   ACTION_NAMES.offers,
   async (_: void, { rejectWithValue, extra: { api } }) => {
     try {
@@ -35,7 +41,11 @@ export const offersThunk = createAppAsyncThunk<OfferMeta[]>(
   }
 );
 
-export const offerThunk = createAppAsyncThunk<OfferDetails, string | undefined>(
+export const offerThunk = createAppAsyncThunk<
+  OfferDetails,
+  string | undefined,
+  { offers: OffersSliceState }
+>(
   ACTION_NAMES.offer,
   async (offerID: string | undefined, { rejectWithValue, extra: { api } }) => {
     try {
@@ -71,7 +81,8 @@ export const offerThunk = createAppAsyncThunk<OfferDetails, string | undefined>(
 
 export const nearbyOffersThunk = createAppAsyncThunk<
   OfferMeta[],
-  string | undefined
+  string | undefined,
+  { offers: OffersSliceState }
 >(
   ACTION_NAMES.nearbyOffers,
   async (offerID: string | undefined, { rejectWithValue, extra: { api } }) => {
@@ -109,7 +120,11 @@ export const nearbyOffersThunk = createAppAsyncThunk<
   }
 );
 
-export const favoriteOffersThunk = createAppAsyncThunk<OfferMeta[], void>(
+export const favoriteOffersThunk = createAppAsyncThunk<
+  OfferMeta[],
+  void,
+  { offers: OffersSliceState; auth: AuthSliceState }
+>(
   ACTION_NAMES.favoriteOffers,
   async (_, { rejectWithValue, extra: { api } }) => {
     try {
@@ -135,7 +150,11 @@ export const favoriteOffersThunk = createAppAsyncThunk<OfferMeta[], void>(
   }
 );
 
-export const addOfferToFavoritesThunk = createAppAsyncThunk<OfferMeta, string>(
+export const addOfferToFavoritesThunk = createAppAsyncThunk<
+  OfferMeta,
+  string,
+  { offers: OffersSliceState }
+>(
   ACTION_NAMES.addOfferToFavorites,
   async (offerId, { rejectWithValue, extra: { api } }) => {
     try {
@@ -170,7 +189,8 @@ export const addOfferToFavoritesThunk = createAppAsyncThunk<OfferMeta, string>(
 
 export const removeOfferFromFavoritesThunk = createAppAsyncThunk<
   OfferMeta,
-  string
+  string,
+  { offers: OffersSliceState }
 >(
   ACTION_NAMES.removeOfferToFavorites,
   async (offerId, { rejectWithValue, extra: { api } }) => {
