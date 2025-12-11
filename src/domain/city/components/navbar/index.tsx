@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import routes from '../../../domain/router/constants/ROUTES';
-import { useCitiesQuery } from '../hooks/use-cities-query';
-import { useCurrentCity } from '../hooks/use-current-city';
+import routes from '../../../router/constants/ROUTES';
+import { useCitiesQuery } from '../../hooks/use-cities-query';
+import { useCurrentCity } from '../../hooks/use-current-city';
 
 type NavbarVariant = 'locations';
 function navbarVariant(variant: NavbarVariant) {
@@ -26,7 +26,10 @@ export function Navbar({ variant }: { variant: NavbarVariant }) {
   const classes = navbarVariant(variant);
 
   return (
-    <ul className={classNames('tabs__list', classes.list)}>
+    <ul
+      className={classNames('tabs__list', classes.list)}
+      data-testid="cities-navbar"
+    >
       {cities.map((c) => (
         <li key={c.name} className="locations__item">
           <Link

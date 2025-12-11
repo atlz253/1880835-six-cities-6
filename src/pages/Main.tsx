@@ -2,7 +2,7 @@ import { Offer } from '../domain/offer/types';
 import { Header } from '../domain/ui/components/Header';
 import { Map } from '../domain/map';
 import { useMemo, useState } from 'react';
-import { Navbar } from '../domain/city/components/Navbar';
+import { Navbar } from '../domain/city/components/navbar';
 import { useOffersQuery } from '../domain/offer';
 import { useCurrentCityFromParams } from '../domain/city/hooks/use-current-city-from-params';
 import { useCurrentCity } from '../domain/city/hooks/use-current-city';
