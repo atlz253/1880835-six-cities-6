@@ -5,7 +5,7 @@ import { Main } from '../../../pages/Main';
 import { Offer } from '../../../pages/Offer';
 import { Favorites } from '../../../pages/Favorites';
 import { Page404 } from '../../../pages/404';
-import { PrivateRoute } from './PrivateRoute';
+import { PrivateRoute } from './private-route';
 import { Error } from '../../../pages/Error';
 
 export function AppRoutes() {
