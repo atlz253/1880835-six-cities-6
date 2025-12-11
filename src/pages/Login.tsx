@@ -1,5 +1,5 @@
 import { Link, Navigate } from 'react-router-dom';
-import { AuthForm } from '../domain/auth/components/AuthForm';
+import { AuthForm } from '../domain/auth/components/auth-form';
 import { useAuthQuery } from '../domain/auth/hooks/use-auth-query';
 import ROUTES from '../domain/router/constants/ROUTES';
 import { setErrorMessage } from '../domain/error/features/setErrorMessage';
