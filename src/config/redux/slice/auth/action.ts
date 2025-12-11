@@ -28,13 +28,13 @@ export const checkLoginThunk = createAppAsyncThunk<
   { auth: AuthSliceState }
 >(
   ACTION_NAMES.loginCheck,
-  async (_, { rejectWithValue, getState, dispatch, extra: { api } }) => {
+  async (_, { rejectWithValue, getState, dispatch, extra: { getApi } }) => {
     const token = selectAuthToken(getState());
     if (token === undefined) {
       return undefined;
     }
     try {
-      return (await api.get<Auth>(ENDPOINTS.login)).data;
+      return (await getApi().get<Auth>(ENDPOINTS.login)).data;
     } catch (error) {
       if (
         isAxiosError(error) &&
@@ -60,9 +60,10 @@ export const checkLoginThunk = createAppAsyncThunk<
 
 export const loginThunk = createAppAsyncThunk<Auth, Credentials>(
   ACTION_NAMES.login,
-  async (credentials, { rejectWithValue, dispatch, extra: { api } }) => {
+  async (credentials, { rejectWithValue, dispatch, extra: { getApi } }) => {
     try {
-      const data = (await api.post<Auth>(ENDPOINTS.login, credentials)).data;
+      const data = (await getApi().post<Auth>(ENDPOINTS.login, credentials))
+        .data;
       dispatch(resetStateAction());
       localStorage.setItem(LOCAL_STORAGE.auth, JSON.stringify(data));
       return data;

@@ -6,7 +6,10 @@ import { getApiMock } from '../../../axios/utils/test';
 import { getFulfilledState } from '../../thunk';
 import { extractActionTypes } from '../../utils/action';
 import { resetStateAction } from '../../utils/resetState';
-import { expectFulfilledThunkValue, getMockStoreCreator } from '../../utils/test';
+import {
+  expectFulfilledThunkValue,
+  getMockStoreCreator,
+} from '../../utils/test';
 import { checkLoginThunk, loginThunk, signOutThunk } from './action';
 import { getEmptyState } from './state';
 

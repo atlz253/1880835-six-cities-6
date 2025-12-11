@@ -1,7 +1,7 @@
 import { getApi } from '../../axios';
 
 export interface ExtraArgument {
-  api: ReturnType<typeof getApi>;
+  getApi: typeof getApi;
 }
 
 export interface SerializedError {
@@ -18,7 +18,7 @@ export interface RejectValue {
 export interface ThunkConfig<State> {
   state: State;
   rejectValue: RejectValue;
-  extra: { api: ReturnType<typeof getApi> };
+  extra: ExtraArgument;
 }
 
 export interface ThunkQuery<Data> {

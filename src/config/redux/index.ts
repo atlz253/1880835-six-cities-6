@@ -2,23 +2,26 @@ import { configureStore } from '@reduxjs/toolkit';
 import { getApi } from '../axios';
 import { ExtraArgument } from './thunk/types';
 import { reducer } from './reducer';
-import { addTokenInterceptor } from './utils/axios';
-
-const api = getApi();
-
-addTokenInterceptor(api);
+import { configureTokenInterceptor } from './utils/axios';
 
 const store = configureStore({
   reducer,
   middleware: (defaultMiddlewares) =>
     defaultMiddlewares({
-      thunk: { extraArgument: { api } satisfies ExtraArgument },
+      thunk: {
+        extraArgument: {
+          getApi,
+        } satisfies ExtraArgument,
+      },
     }),
 });
 
+configureTokenInterceptor(store);
+
 type State = ReturnType<typeof store.getState>;
 
+type AppStore = typeof store;
 type AppDispatch = typeof store.dispatch;
 
 export { store };
-export type { State, AppDispatch };
+export type { State, AppStore, AppDispatch };
