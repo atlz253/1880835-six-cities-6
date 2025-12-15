@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { CommentForm } from './comment-form';
-import { CommentsList } from './comments-list';
-import { useOfferCommentsQuery } from '../hooks/use-offer-comments-query';
-import { Loader } from '../../ui/components/Loader';
+import { CommentForm } from '../comment-form';
+import { CommentsList } from '../comments-list';
+import { useOfferCommentsQuery } from '../../hooks/use-offer-comments-query';
+import { Loader } from '../../../ui/components/Loader';
 import { ReactNode } from 'react';
-import { useAuthStatus } from '../../auth';
+import { useAuthStatus } from '../../../auth';
 
 export function CommentsSection({
   offerID,
@@ -37,7 +37,10 @@ export function CommentsSection({
   }
 
   return (
-    <section className={classNames('reviews', className)}>
+    <section
+      className={classNames('reviews', className)}
+      data-testid="comments-section"
+    >
       <h2 className="reviews__title">
         Reviews · <span className="reviews__amount">{comments.length}</span>
       </h2>

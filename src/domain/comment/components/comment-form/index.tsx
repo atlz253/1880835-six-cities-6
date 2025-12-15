@@ -60,7 +60,12 @@ export function CommentForm({ offerId }: { offerId?: string }) {
   }
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      data-testid="comment-form"
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>

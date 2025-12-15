@@ -4,7 +4,7 @@ import routes from '../domain/router/constants/ROUTES';
 import classNames from 'classnames';
 import { Rating } from '../domain/rating/components/rating';
 import offerRatingClassNames from '../domain/offer/constants/offerRatingClassNames';
-import { CommentsSection } from '../domain/comment/components/CommentsSection';
+import { CommentsSection } from '../domain/comment/components/comments-section';
 import { Map } from '../domain/map';
 import { Loader } from '../domain/ui/components/Loader';
 import { useOfferQuery } from '../domain/offer/hooks/use-offer-query';
