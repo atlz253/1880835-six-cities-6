@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { CommentForm } from './CommentForm';
+import { CommentForm } from './comment-form';
 import { CommentsList } from './comments-list';
 import { useOfferCommentsQuery } from '../hooks/use-offer-comments-query';
 import { Loader } from '../../ui/components/Loader';

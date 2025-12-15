@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import { RatingInput as RatingInput } from '../../rating/components/rating-input';
-import { Comment } from '../types';
-import { createOnChangeHandler } from '../../../utils/react/form/createOnChangeHandler';
-import { postComment } from '../features/postComment';
-import { preventDefault } from '../../../utils/event';
-import { useCommentPostQuery } from '../hooks/use-comment-post-query';
+import { RatingInput as RatingInput } from '../../../rating/components/rating-input';
+import { Comment } from '../../types';
+import { createOnChangeHandler } from '../../../../utils/react/form/createOnChangeHandler';
+import { postComment } from '../../features/postComment';
+import { preventDefault } from '../../../../utils/event';
+import { useCommentPostQuery } from '../../hooks/use-comment-post-query';
 import {
   isNotFoundError,
   isUnauthorizedError,
   isValidationError,
-} from '../../../config/redux/thunk';
+} from '../../../../config/redux/thunk';
 import { Navigate } from 'react-router-dom';
-import ROUTES from '../../router/constants/ROUTES';
-import { resetCommentPostQuery } from '../features/resetCommentPostQuery';
+import ROUTES from '../../../router/constants/ROUTES';
+import { resetCommentPostQuery } from '../../features/resetCommentPostQuery';
+
+const COMMENT_MIN_CHARACTERS = 50;
 
 const getEmptyCommentState = (): Partial<Comment> => ({ comment: '' });
 
@@ -70,6 +72,7 @@ export function CommentForm({ offerId }: { offerId?: string }) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment.comment}
         onChange={onChange}
+        data-testid="comment-input"
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -84,7 +87,7 @@ export function CommentForm({ offerId }: { offerId?: string }) {
           disabled={
             offerId === undefined ||
             comment.comment === undefined ||
-            comment.comment.length < 50 ||
+            comment.comment.length < COMMENT_MIN_CHARACTERS ||
             comment.rating === undefined ||
             isLoading
           }
