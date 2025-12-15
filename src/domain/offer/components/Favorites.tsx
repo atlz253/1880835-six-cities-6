@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { OfferMeta } from '../types';
-import { Card } from './Card';
+import { Card } from './_card';
 import { useFavoriteOffersQuery } from '../hooks/use-favorite-offers-query';
 import { Loader } from '../../ui/components/Loader';
 import { setErrorMessage } from '../../error/features/setErrorMessage';
