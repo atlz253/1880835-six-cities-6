@@ -1,6 +1,6 @@
 import { memo, MouseEvent } from 'react';
 import { OfferMeta } from '../../types';
-import { Card } from '../Card/Card';
+import { Card } from '../Card';
 
 const CardList = memo(
   ({
