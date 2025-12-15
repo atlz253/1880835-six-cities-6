@@ -12,7 +12,7 @@ import { useNearbyOffersQuery } from '../domain/offer/hooks/use-nearby-offers-qu
 import { setErrorMessage } from '../domain/error/features/setErrorMessage';
 import { useAuthCheck } from '../domain/auth/hooks/use-auth-check';
 import ERROR_TYPES from '../config/redux/thunk/constants/ERROR_TYPES';
-import CardList from '../domain/offer/components/CardList';
+import CardList from '../domain/offer/components/card-list';
 import { useAuthStatus } from '../domain/auth';
 import { removeOfferWithIdFromFavorites } from '../domain/offer/features/removeOfferWithIdFromFavorites';
 import { addOfferWithIdToFavorites } from '../domain/offer/features/addOfferWithIdToFavorites';

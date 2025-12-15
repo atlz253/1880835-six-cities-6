@@ -4,7 +4,7 @@ import { City } from '../../city/types';
 import { SortSelect } from './SortSelect';
 import { useSortSelectOptions } from './SortSelect/hooks/useSortSelectOptions';
 import { comparatorBySortType } from '../helpers/comparatorBySortType';
-import CardList from './CardList';
+import CardList from './card-list';
 
 export default function CityOffers({
   city,

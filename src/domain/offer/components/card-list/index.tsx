@@ -1,6 +1,6 @@
 import { memo, MouseEvent } from 'react';
-import { OfferMeta } from '../types';
-import { Card } from './Card/Card';
+import { OfferMeta } from '../../types';
+import { Card } from '../Card/Card';
 
 const CardList = memo(
   ({
@@ -38,6 +38,6 @@ const CardList = memo(
   )
 );
 
-CardList.displayName = CardList.name;
+CardList.displayName = 'CardList';
 
 export default CardList;
