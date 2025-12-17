@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react';
 import { Offer, OfferMeta } from '../types';
 import { City } from '../../city/types';
-import { SortSelect } from './SortSelect';
-import { useSortSelectOptions } from './SortSelect/hooks/useSortSelectOptions';
+import { SortSelect } from './sort-select';
+import { useSortSelectOptions } from './sort-select/hooks/useSortSelectOptions';
 import { comparatorBySortType } from '../helpers/comparatorBySortType';
 import CardList from './card-list';
 

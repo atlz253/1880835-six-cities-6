@@ -8,6 +8,7 @@ export function SortSelect({ select }: { select: Select }) {
       action="#"
       method="get"
       onClick={() => select.setOpen((prev) => !prev)}
+      data-testid="offers-sort-select"
     >
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0}>
@@ -21,6 +22,7 @@ export function SortSelect({ select }: { select: Select }) {
           'places__options places__options--custom',
           select.open && 'places__options--opened'
         )}
+        data-testid="offers-sort-select-options"
       >
         {select.getOptions().map((o) => (
           <li
