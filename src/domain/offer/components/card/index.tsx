@@ -1,7 +1,7 @@
 import { MouseEvent, useMemo } from 'react';
 import { capitalize } from '../../../../utils/string';
 import { Offer } from '../../types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import routes from '../../../router/constants/ROUTES';
 import { Rating } from '../../../rating/components/rating';
 import cardRatingClassNames from './constants/ratingClassNames';
@@ -10,6 +10,7 @@ import { useAuthStatus } from '../../../auth';
 import { removeOfferWithIdFromFavorites } from '../../features/removeOfferWithIdFromFavorites';
 import { addOfferWithIdToFavorites } from '../../features/addOfferWithIdToFavorites';
 import { stopPropagation } from '../../../../utils/event';
+import ROUTES from '../../../router/constants/ROUTES';
 
 type CardVariant = 'cities' | 'favorites';
 function cardVariant(variant: CardVariant) {
@@ -58,7 +59,16 @@ export function Card({
     [variant]
   );
   const isAuth = useAuthStatus();
-
+  const navigate = useNavigate();
+  const onFavoriteButtonClick = () => {
+    if (!isAuth) {
+      navigate(ROUTES.login);
+    } else if (isFavorite) {
+      removeOfferWithIdFromFavorites(id);
+    } else {
+      addOfferWithIdToFavorites(id);
+    }
+  };
   return (
     <article
       className={classNames('place-card', variantInfo.article)}
@@ -92,30 +102,24 @@ export function Card({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          {isAuth && (
-            <button
-              className={[
-                'place-card__bookmark-button button',
-                isFavorite ? 'place-card__bookmark-button--active' : null,
-              ]
-                .filter((e) => e !== null)
-                .join(' ')}
-              type="button"
-              onClick={stopPropagation(() =>
-                isFavorite
-                  ? removeOfferWithIdFromFavorites(id)
-                  : addOfferWithIdToFavorites(id)
-              )}
-              data-testid="favorite-button"
-            >
-              <svg className="place-card__bookmark-icon" width="18" height="19">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">
-                {isFavorite ? 'In bookmarks' : 'To bookmarks'}
-              </span>
-            </button>
-          )}
+          <button
+            className={[
+              'place-card__bookmark-button button',
+              isFavorite ? 'place-card__bookmark-button--active' : null,
+            ]
+              .filter((e) => e !== null)
+              .join(' ')}
+            type="button"
+            onClick={stopPropagation(onFavoriteButtonClick)}
+            data-testid="favorite-button"
+          >
+            <svg className="place-card__bookmark-icon" width="18" height="19">
+              <use xlinkHref="#icon-bookmark"></use>
+            </svg>
+            <span className="visually-hidden">
+              {isFavorite ? 'In bookmarks' : 'To bookmarks'}
+            </span>
+          </button>
         </div>
         <Rating rating={rating} classNames={cardRatingClassNames} />
         <h2 className="place-card__name">
