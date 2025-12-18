@@ -58,6 +58,7 @@ export function AuthForm() {
         type="submit"
         onClick={preventDefault(() => login(credentials))}
         data-testid="login-button"
+        disabled={credentials.email === '' || credentials.password === ''}
       >
         Sign in
       </button>

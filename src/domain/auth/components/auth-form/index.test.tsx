@@ -55,4 +55,21 @@ describe(AuthForm.name, () => {
     fireEvent.click(loginButton);
     expect(mockedLogin).toHaveBeenCalledTimes(1);
   });
+
+  test('sign in button should be disabled if email or password empty', () => {
+    const credentials = getCredentialsMock();
+    render(<AuthForm />);
+    const emailInput = screen.getByTestId('email-input');
+    const passwordInput = screen.getByTestId('password-input');
+    const loginButton = screen.getByTestId('login-button');
+    expect(loginButton.hasAttribute('disabled')).toEqual(true);
+    fireEvent.change(emailInput, { target: { value: credentials.email } });
+    expect(loginButton.hasAttribute('disabled')).toEqual(true);
+    fireEvent.change(passwordInput, {
+      target: { value: credentials.password },
+    });
+    expect(loginButton.hasAttribute('disabled')).toEqual(false);
+    fireEvent.change(emailInput, { target: { value: '' } });
+    expect(loginButton.hasAttribute('disabled')).toEqual(true);
+  });
 });
