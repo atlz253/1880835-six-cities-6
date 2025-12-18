@@ -1,5 +1,5 @@
 import { Offer } from '../domain/offer/types';
-import { Header } from '../domain/ui/components/Header';
+import { Header } from '../domain/ui/components/header';
 import { Map } from '../domain/map';
 import { useMemo, useState } from 'react';
 import { Navbar } from '../domain/city/components/navbar';

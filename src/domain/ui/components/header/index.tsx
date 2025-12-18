@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
-import routes from '../../router/constants/ROUTES';
-import { useAuthStatus } from '../../auth/hooks/use-auth-status';
-import { preventDefault } from '../../../utils/event';
-import { signOut } from '../../auth/features/signOut';
-import ROUTES from '../../router/constants/ROUTES';
-import { useAuthQuery } from '../../auth/hooks/use-auth-query';
-import { useFavoriteOffersQuery } from '../../offer/hooks/use-favorite-offers-query';
+import routes from '../../../router/constants/ROUTES';
+import { useAuthStatus } from '../../../auth/hooks/use-auth-status';
+import { preventDefault } from '../../../../utils/event';
+import { signOut } from '../../../auth/features/signOut';
+import ROUTES from '../../../router/constants/ROUTES';
+import { useAuthQuery } from '../../../auth/hooks/use-auth-query';
+import { useFavoriteOffersQuery } from '../../../offer/hooks/use-favorite-offers-query';
 
 export function Header() {
   const { data } = useAuthQuery();
@@ -19,7 +19,7 @@ export function Header() {
   });
 
   return (
-    <header className="header">
+    <header className="header" data-testid="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
@@ -43,12 +43,16 @@ export function Header() {
                   <Link
                     className="header__nav-link header__nav-link--profile"
                     to={routes.favorites}
+                    data-testid="favorites-link"
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
                       {data?.email}
                     </span>
-                    <span className="header__favorite-count">
+                    <span
+                      className="header__favorite-count"
+                      data-testid="favorite-count"
+                    >
                       {favoriteOffers ? favoriteOffers.length : 0}
                     </span>
                   </Link>

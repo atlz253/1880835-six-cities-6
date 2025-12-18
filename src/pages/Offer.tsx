@@ -1,5 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom';
-import { Header } from '../domain/ui/components/Header';
+import { Header } from '../domain/ui/components/header';
 import routes from '../domain/router/constants/ROUTES';
 import classNames from 'classnames';
 import { Rating } from '../domain/rating/components/rating';
