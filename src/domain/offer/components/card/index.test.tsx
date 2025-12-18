@@ -4,12 +4,17 @@ import { getOfferDetailsMock } from '../../mocks/get-offer-details-mock';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { getEmptyState } from '../../../../config/redux/slice/auth/state';
 import { Provider } from 'react-redux';
-import { MockPageRouter } from '../../../router/utils/test/components';
+import {
+  MockPageRouter,
+  MockRouter,
+} from '../../../router/utils/test/components';
 import ROUTES from '../../../router/constants/ROUTES';
 import { removeOfferWithIdFromFavorites } from '../../features/removeOfferWithIdFromFavorites';
 import { addOfferWithIdToFavorites } from '../../features/addOfferWithIdToFavorites';
 import { getAuthorizedStateMock } from '../../../../config/redux/slice/auth/utils/test';
 import { OfferDetails } from '../../types';
+import { CurrentLocation } from '../../../router/components/current-location';
+import { Route, Routes } from 'react-router-dom';
 
 describe(Card.name, () => {
   const mockStoreCreator = getMockStoreCreator();
@@ -85,5 +90,28 @@ describe(Card.name, () => {
       </Provider>
     );
     expect(screen.getByText('Premium')).toBeInTheDocument();
+  });
+
+  test('should navigate to login page on favorites button click if not authorized', () => {
+    const offer: OfferDetails = { ...getOfferDetailsMock(), isFavorite: false };
+    const store = mockStoreCreator({ auth: getEmptyState() });
+    render(
+      <Provider store={store}>
+        <MockRouter>
+          <CurrentLocation />
+          <Routes>
+            <Route
+              path={ROUTES.cities}
+              element={<Card offer={offer} imageURL={offer.images[0]} />}
+            />
+            <Route path={ROUTES.login} />
+          </Routes>
+        </MockRouter>
+      </Provider>
+    );
+    const favoriteButton = screen.getByTestId('favorite-button');
+    fireEvent.click(favoriteButton);
+    const currentLocation = screen.getByTestId(CurrentLocation.testId);
+    expect(currentLocation.textContent).toEqual(ROUTES.login);
   });
 });
