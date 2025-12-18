@@ -6,4 +6,4 @@ export default [
   { value: SORT_TYPES.priceLowToHigh, render: () => 'Price: low to high' },
   { value: SORT_TYPES.priceHighToLow, render: () => 'Price: high to low' },
   { value: SORT_TYPES.topRatedFirst, render: () => 'Top rated first' },
-] as const satisfies Option[];
+] satisfies Option[];
