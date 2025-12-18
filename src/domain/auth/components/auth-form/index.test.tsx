@@ -73,7 +73,7 @@ describe(AuthForm.name, () => {
     expect(loginButton.hasAttribute('disabled')).toEqual(true);
   });
 
-  test('sign in button should be disabled if email no valid', () => {
+  test('sign in button should be disabled if email invalid', () => {
     const credentials = getCredentialsMock();
     render(<AuthForm />);
     const emailInput = screen.getByTestId('email-input');
@@ -84,5 +84,26 @@ describe(AuthForm.name, () => {
       target: { value: credentials.password },
     });
     expect(loginButton.hasAttribute('disabled')).toEqual(true);
+  });
+
+  test('sign in button should be disabled if password invalid', () => {
+    const credentials = getCredentialsMock();
+    render(<AuthForm />);
+    const emailInput = screen.getByTestId('email-input');
+    const passwordInput = screen.getByTestId('password-input');
+    const loginButton = screen.getByTestId('login-button');
+    fireEvent.change(emailInput, { target: { value: credentials.email } });
+    fireEvent.change(passwordInput, {
+      target: { value: 'invalid' },
+    });
+    expect(loginButton.hasAttribute('disabled')).toEqual(true);
+    fireEvent.change(passwordInput, {
+      target: { value: '123' },
+    });
+    expect(loginButton.hasAttribute('disabled')).toEqual(true);
+    fireEvent.change(passwordInput, {
+      target: { value: 'v1' },
+    });
+    expect(loginButton.hasAttribute('disabled')).toEqual(false);
   });
 });

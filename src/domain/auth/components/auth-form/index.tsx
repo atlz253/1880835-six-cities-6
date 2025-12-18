@@ -3,6 +3,7 @@ import { createOnChangeHandler } from '../../../../utils/react/form/createOnChan
 import { Credentials } from '../../types';
 import { login } from '../../features/login';
 import { preventDefault } from '../../../../utils/event';
+import { isValidPassword } from '../../utils/password';
 
 export function AuthForm() {
   const [credentials, setCredentials] = useState<Credentials>({
@@ -61,9 +62,8 @@ export function AuthForm() {
         onClick={preventDefault(() => login(credentials))}
         data-testid="login-button"
         disabled={
-          credentials.email === '' ||
-          credentials.password === '' ||
-          !formRef.current?.checkValidity()
+          !formRef.current?.checkValidity() ||
+          !isValidPassword(credentials.password)
         }
       >
         Sign in
