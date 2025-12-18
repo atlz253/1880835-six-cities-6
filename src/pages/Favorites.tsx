@@ -1,4 +1,4 @@
-import { Favorites as FavoritesView } from '../domain/offer/components/Favorites';
+import { Favorites as FavoritesView } from '../domain/offer/components/favorites';
 import { Header } from '../domain/ui/components/Header';
 import { useOffersQuery } from '../domain/offer';
 import { Loader } from '../domain/ui/components/Loader';

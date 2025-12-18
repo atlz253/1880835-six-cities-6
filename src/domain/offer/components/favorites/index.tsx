@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import { OfferMeta } from '../types';
-import { Card } from './card';
-import { useFavoriteOffersQuery } from '../hooks/use-favorite-offers-query';
-import { Loader } from '../../ui/components/Loader';
-import { setErrorMessage } from '../../error/features/setErrorMessage';
+import { OfferMeta } from '../../types';
+import { Card } from '../card';
+import { useFavoriteOffersQuery } from '../../hooks/use-favorite-offers-query';
+import { Loader } from '../../../ui/components/Loader';
+import { setErrorMessage } from '../../../error/features/setErrorMessage';
 import { Navigate } from 'react-router-dom';
-import ROUTES from '../../router/constants/ROUTES';
+import ROUTES from '../../../router/constants/ROUTES';
 
 export function Favorites() {
   const { data: offers, isLoading, isError, error } = useFavoriteOffersQuery();
