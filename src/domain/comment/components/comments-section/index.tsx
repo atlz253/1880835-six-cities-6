@@ -3,8 +3,9 @@ import { CommentForm } from '../comment-form';
 import { CommentsList } from '../comments-list';
 import { useOfferCommentsQuery } from '../../hooks/use-offer-comments-query';
 import { Loader } from '../../../ui/components/Loader';
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { useAuthStatus } from '../../../auth';
+import maxComments from './constants/max-comments';
 
 export function CommentsSection({
   offerID,
@@ -23,6 +24,17 @@ export function CommentsSection({
   const Section = ({ children }: { children: ReactNode }) => (
     <section className={classNames('reviews', className)}>{children}</section>
   );
+  const sortedComments = useMemo(
+    () =>
+      comments?.toSorted(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      ),
+    [comments]
+  );
+  const limitedAndSortedComments = useMemo(
+    () => sortedComments?.slice(0, maxComments),
+    [sortedComments]
+  );
 
   if (isLoading) {
     return (
@@ -32,7 +44,11 @@ export function CommentsSection({
     );
   }
 
-  if (isError || comments === undefined) {
+  if (
+    isError ||
+    comments === undefined ||
+    limitedAndSortedComments === undefined
+  ) {
     return <Section>{error?.cause?.message ?? 'Comments get error'}</Section>;
   }
 
@@ -44,7 +60,7 @@ export function CommentsSection({
       <h2 className="reviews__title">
         Reviews · <span className="reviews__amount">{comments.length}</span>
       </h2>
-      <CommentsList comments={comments} />
+      <CommentsList comments={limitedAndSortedComments} />
       {authStatus && <CommentForm offerId={offerID} />}
     </section>
   );

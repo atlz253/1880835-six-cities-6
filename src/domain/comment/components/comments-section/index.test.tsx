@@ -7,6 +7,7 @@ import { getEmptyState as getEmptyCommentsState } from '../../../../config/redux
 import { getPostedCommentsMock } from '../../mocks/get-posted-comments-mock';
 import { getFulfilledState } from '../../../../config/redux/thunk';
 import { getAuthorizedStateMock } from '../../../../config/redux/slice/auth/utils/test';
+import maxComments from './constants/max-comments';
 
 describe(CommentsSection.name, () => {
   const mockStoreCreator = getMockStoreCreator();
@@ -27,9 +28,6 @@ describe(CommentsSection.name, () => {
       </Provider>
     );
     expect(screen.getByTestId('comments-section')).toBeInTheDocument();
-    comments.forEach((c) =>
-      expect(screen.getByText(c.comment)).toBeInTheDocument()
-    );
   });
 
   test('should render review form if authorized', () => {
@@ -48,5 +46,26 @@ describe(CommentsSection.name, () => {
       </Provider>
     );
     expect(screen.getByTestId('comment-form')).toBeInTheDocument();
+  });
+
+  test(`should render only ${maxComments} comments`, () => {
+    const offerId = 'offerId';
+    const comments = getPostedCommentsMock();
+    const store = mockStoreCreator({
+      auth: getEmptyAuthState(),
+      comments: {
+        ...getEmptyCommentsState(),
+        offerComments: { [offerId]: getFulfilledState(comments) },
+      },
+    });
+    render(
+      <Provider store={store}>
+        <CommentsSection offerID={offerId} />
+      </Provider>
+    );
+    expect(comments.length > maxComments).toEqual(true);
+    comments
+      .slice(0, maxComments)
+      .forEach((c) => expect(screen.getByText(c.comment)).toBeInTheDocument());
   });
 });
