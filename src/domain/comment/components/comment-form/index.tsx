@@ -13,8 +13,7 @@ import {
 import { Navigate } from 'react-router-dom';
 import ROUTES from '../../../router/constants/ROUTES';
 import { resetCommentPostQuery } from '../../features/resetCommentPostQuery';
-
-const COMMENT_MIN_CHARACTERS = 50;
+import limits from './constants/limits';
 
 const getEmptyCommentState = (): Partial<Comment> => ({ comment: '' });
 
@@ -78,6 +77,7 @@ export function CommentForm({ offerId }: { offerId?: string }) {
         value={comment.comment}
         onChange={onChange}
         data-testid="comment-input"
+        maxLength={limits.commentMaxCharacters}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -92,7 +92,7 @@ export function CommentForm({ offerId }: { offerId?: string }) {
           disabled={
             offerId === undefined ||
             comment.comment === undefined ||
-            comment.comment.length < COMMENT_MIN_CHARACTERS ||
+            comment.comment.length < limits.commentMinCharacters ||
             comment.rating === undefined ||
             isLoading
           }

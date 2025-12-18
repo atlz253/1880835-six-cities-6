@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { getEmptyState } from '../../../../config/redux/slice/comments/state';
 import { postComment } from '../../features/postComment';
 import { Mock } from 'vitest';
+import limits from './constants/limits';
 
 describe(CommentForm.name, () => {
   const mockStoreCreator = getMockStoreCreator();
@@ -40,7 +41,7 @@ describe(CommentForm.name, () => {
     expect(submitButton.hasAttribute('disabled')).toEqual(true);
   });
 
-  test('submit button should be disabled if characters less than 50', () => {
+  test(`submit button should be disabled if characters less than ${limits.commentMinCharacters}`, () => {
     const store = mockStoreCreator({ comments: getEmptyState() });
     const offerId = 'test-offer-id';
     const textareaValue = 'short comment';
@@ -64,7 +65,8 @@ describe(CommentForm.name, () => {
   test('submit button should be enabled if all fields valid', () => {
     const store = mockStoreCreator({ comments: getEmptyState() });
     const offerId = 'test-offer-id';
-    const textareaValue = 'cool test offer review with more than 50 characters';
+    const textareaValue =
+      'cool test offer review with more than minimum characters';
     render(
       <Provider store={store}>
         <CommentForm offerId={offerId} />
@@ -79,6 +81,7 @@ describe(CommentForm.name, () => {
         value: textareaValue,
       },
     });
+    expect(textareaValue.length >= limits.commentMinCharacters).toEqual(true);
     expect(submitButton.hasAttribute('disabled')).toEqual(false);
   });
 
