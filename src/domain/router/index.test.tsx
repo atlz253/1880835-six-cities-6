@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import ROUTES from './constants/ROUTES';
-import { MockRouter } from './utils/test/components';
+import { MockAppRouter } from './utils/test/components';
 import { getOffersMetaMocks } from '../offer/mocks/get-offers-meta-mocks';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
 import { Provider } from 'react-redux';
@@ -21,7 +21,7 @@ describe('routing', () => {
     const store = mockStoreCreator({ auth: getEmptyAuthState() });
     render(
       <Provider store={store}>
-        <MockRouter initialEntries={[ROUTES.login]} />
+        <MockAppRouter initialEntries={[ROUTES.login]} />
       </Provider>
     );
     expect(screen.getAllByText('Sign in')[0]).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe('routing', () => {
     });
     render(
       <Provider store={store}>
-        <MockRouter initialEntries={[ROUTES.cities]} />
+        <MockAppRouter initialEntries={[ROUTES.cities]} />
       </Provider>
     );
     expect((await screen.findAllByText('Cities'))[0]).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe('routing', () => {
     });
     render(
       <Provider store={store}>
-        <MockRouter initialEntries={[ROUTES.offer({ id: 'test' })]} />
+        <MockAppRouter initialEntries={[ROUTES.offer({ id: 'test' })]} />
       </Provider>
     );
     expect(await screen.findByText('Meet the host')).toBeInTheDocument();
@@ -77,7 +77,7 @@ describe('routing', () => {
     });
     render(
       <Provider store={store}>
-        <MockRouter initialEntries={[ROUTES.favorites]} />
+        <MockAppRouter initialEntries={[ROUTES.favorites]} />
       </Provider>
     );
     expect(await screen.findByTestId('favorites-page')).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe('routing', () => {
     const store = mockStoreCreator();
     render(
       <Provider store={store}>
-        <MockRouter initialEntries={[ROUTES.notFound]} />
+        <MockAppRouter initialEntries={[ROUTES.notFound]} />
       </Provider>
     );
     expect(screen.getByText('404 Not Found')).toBeInTheDocument();
@@ -97,7 +97,7 @@ describe('routing', () => {
     const store = mockStoreCreator({ error: getEmptyErrorState() });
     render(
       <Provider store={store}>
-        <MockRouter initialEntries={[ROUTES.error]} />
+        <MockAppRouter initialEntries={[ROUTES.error]} />
       </Provider>
     );
     expect(screen.getByText('App error :(')).toBeInTheDocument();

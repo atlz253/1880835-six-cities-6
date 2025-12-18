@@ -12,6 +12,7 @@ import {
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
 import LOCAL_STORAGE from './constants/local-storage';
+import { AuthSliceState } from './state';
 
 export const signOutThunk = createAppAsyncThunk<void>(
   ACTION_NAMES.signOut,
@@ -21,15 +22,19 @@ export const signOutThunk = createAppAsyncThunk<void>(
   }
 );
 
-export const checkLoginThunk = createAppAsyncThunk<Auth | undefined>(
+export const checkLoginThunk = createAppAsyncThunk<
+  Auth | undefined,
+  void,
+  { auth: AuthSliceState }
+>(
   ACTION_NAMES.loginCheck,
-  async (_, { rejectWithValue, getState, dispatch, extra: { api } }) => {
+  async (_, { rejectWithValue, getState, dispatch, extra: { getApi } }) => {
     const token = selectAuthToken(getState());
     if (token === undefined) {
       return undefined;
     }
     try {
-      return (await api.get<Auth>(ENDPOINTS.login)).data;
+      return (await getApi().get<Auth>(ENDPOINTS.login)).data;
     } catch (error) {
       if (
         isAxiosError(error) &&
@@ -55,9 +60,10 @@ export const checkLoginThunk = createAppAsyncThunk<Auth | undefined>(
 
 export const loginThunk = createAppAsyncThunk<Auth, Credentials>(
   ACTION_NAMES.login,
-  async (credentials, { rejectWithValue, dispatch, extra: { api } }) => {
+  async (credentials, { rejectWithValue, dispatch, extra: { getApi } }) => {
     try {
-      const data = (await api.post<Auth>(ENDPOINTS.login, credentials)).data;
+      const data = (await getApi().post<Auth>(ENDPOINTS.login, credentials))
+        .data;
       dispatch(resetStateAction());
       localStorage.setItem(LOCAL_STORAGE.auth, JSON.stringify(data));
       return data;

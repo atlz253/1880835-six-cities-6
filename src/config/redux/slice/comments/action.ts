@@ -10,16 +10,23 @@ import ACTION_NAMES from './constants/ACTION_NAMES';
 import { AxiosError } from 'axios';
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
+import { CommentsSliceState } from './state';
 
 export const offerCommentsThunk = createAppAsyncThunk<
   PostedComment[],
-  string | undefined
+  string | undefined,
+  { comments: CommentsSliceState }
 >(
   ACTION_NAMES.offerComments,
-  async (offerID: string | undefined, { rejectWithValue, extra: { api } }) => {
+  async (
+    offerID: string | undefined,
+    { rejectWithValue, extra: { getApi } }
+  ) => {
     try {
       return (
-        await api.get<PostedComment[]>(ENDPOINTS.comments(offerID as string))
+        await getApi().get<PostedComment[]>(
+          ENDPOINTS.comments(offerID as string)
+        )
       ).data;
     } catch (error) {
       if (
@@ -53,10 +60,10 @@ export const postCommentThunk = createAppAsyncThunk<
   { offerId: string; comment: Comment }
 >(
   ACTION_NAMES.postComment,
-  async ({ offerId, comment }, { rejectWithValue, extra: { api } }) => {
+  async ({ offerId, comment }, { rejectWithValue, extra: { getApi } }) => {
     try {
       return (
-        await api.post<PostedComment>(ENDPOINTS.comments(offerId), comment)
+        await getApi().post<PostedComment>(ENDPOINTS.comments(offerId), comment)
       ).data;
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

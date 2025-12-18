@@ -1,8 +1,7 @@
-import { State } from '..';
-import { api } from '../../axios';
+import { getApi } from '../../axios';
 
 export interface ExtraArgument {
-  api: typeof api;
+  getApi: typeof getApi;
 }
 
 export interface SerializedError {
@@ -16,10 +15,10 @@ export interface RejectValue {
   cause?: Partial<SerializedError>;
 }
 
-export interface ThunkConfig {
+export interface ThunkConfig<State> {
   state: State;
   rejectValue: RejectValue;
-  extra: { api: typeof api };
+  extra: ExtraArgument;
 }
 
 export interface ThunkQuery<Data> {

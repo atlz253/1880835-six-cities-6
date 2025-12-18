@@ -15,12 +15,18 @@ import {
   selectFavoriteOfferChangeState,
   selectFavoriteOffersState,
 } from './selector';
+import { OffersSliceState } from './state';
+import { AuthSliceState } from '../auth/state';
 
-export const offersThunk = createAppAsyncThunk<OfferMeta[]>(
+export const offersThunk = createAppAsyncThunk<
+  OfferMeta[],
+  void,
+  { offers: OffersSliceState }
+>(
   ACTION_NAMES.offers,
-  async (_: void, { rejectWithValue, extra: { api } }) => {
+  async (_: void, { rejectWithValue, extra: { getApi } }) => {
     try {
-      return (await api.get<OfferMeta[]>(ENDPOINTS.offers)).data;
+      return (await getApi().get<OfferMeta[]>(ENDPOINTS.offers)).data;
     } catch (error) {
       return rejectWithValue(getRejectValue(error));
     }
@@ -35,12 +41,20 @@ export const offersThunk = createAppAsyncThunk<OfferMeta[]>(
   }
 );
 
-export const offerThunk = createAppAsyncThunk<OfferDetails, string | undefined>(
+export const offerThunk = createAppAsyncThunk<
+  OfferDetails,
+  string | undefined,
+  { offers: OffersSliceState }
+>(
   ACTION_NAMES.offer,
-  async (offerID: string | undefined, { rejectWithValue, extra: { api } }) => {
+  async (
+    offerID: string | undefined,
+    { rejectWithValue, extra: { getApi } }
+  ) => {
     try {
-      return (await api.get<OfferDetails>(ENDPOINTS.offer(offerID as string)))
-        .data;
+      return (
+        await getApi().get<OfferDetails>(ENDPOINTS.offer(offerID as string))
+      ).data;
     } catch (error) {
       if (
         isAxiosError(error) &&
@@ -71,13 +85,19 @@ export const offerThunk = createAppAsyncThunk<OfferDetails, string | undefined>(
 
 export const nearbyOffersThunk = createAppAsyncThunk<
   OfferMeta[],
-  string | undefined
+  string | undefined,
+  { offers: OffersSliceState }
 >(
   ACTION_NAMES.nearbyOffers,
-  async (offerID: string | undefined, { rejectWithValue, extra: { api } }) => {
+  async (
+    offerID: string | undefined,
+    { rejectWithValue, extra: { getApi } }
+  ) => {
     try {
       return (
-        await api.get<OfferMeta[]>(ENDPOINTS.nearbyOffers(offerID as string))
+        await getApi().get<OfferMeta[]>(
+          ENDPOINTS.nearbyOffers(offerID as string)
+        )
       ).data;
     } catch (error) {
       if (
@@ -109,11 +129,15 @@ export const nearbyOffersThunk = createAppAsyncThunk<
   }
 );
 
-export const favoriteOffersThunk = createAppAsyncThunk<OfferMeta[], void>(
+export const favoriteOffersThunk = createAppAsyncThunk<
+  OfferMeta[],
+  void,
+  { offers: OffersSliceState; auth: AuthSliceState }
+>(
   ACTION_NAMES.favoriteOffers,
-  async (_, { rejectWithValue, extra: { api } }) => {
+  async (_, { rejectWithValue, extra: { getApi } }) => {
     try {
-      return (await api.get<OfferMeta[]>(ENDPOINTS.favorite)).data;
+      return (await getApi().get<OfferMeta[]>(ENDPOINTS.favorite)).data;
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         return rejectWithValue({
@@ -135,12 +159,16 @@ export const favoriteOffersThunk = createAppAsyncThunk<OfferMeta[], void>(
   }
 );
 
-export const addOfferToFavoritesThunk = createAppAsyncThunk<OfferMeta, string>(
+export const addOfferToFavoritesThunk = createAppAsyncThunk<
+  OfferMeta,
+  string,
+  { offers: OffersSliceState }
+>(
   ACTION_NAMES.addOfferToFavorites,
-  async (offerId, { rejectWithValue, extra: { api } }) => {
+  async (offerId, { rejectWithValue, extra: { getApi } }) => {
     try {
       return (
-        await api.post<OfferMeta>(
+        await getApi().post<OfferMeta>(
           ENDPOINTS.offerFavoriteState({ offerId, isFavorite: true })
         )
       ).data;
@@ -170,13 +198,14 @@ export const addOfferToFavoritesThunk = createAppAsyncThunk<OfferMeta, string>(
 
 export const removeOfferFromFavoritesThunk = createAppAsyncThunk<
   OfferMeta,
-  string
+  string,
+  { offers: OffersSliceState }
 >(
   ACTION_NAMES.removeOfferToFavorites,
-  async (offerId, { rejectWithValue, extra: { api } }) => {
+  async (offerId, { rejectWithValue, extra: { getApi } }) => {
     try {
       return (
-        await api.post<OfferMeta>(
+        await getApi().post<OfferMeta>(
           ENDPOINTS.offerFavoriteState({ offerId, isFavorite: false })
         )
       ).data;

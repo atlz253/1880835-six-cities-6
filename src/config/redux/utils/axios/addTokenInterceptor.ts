@@ -1,10 +1,18 @@
 import { AxiosInstance } from 'axios';
 import { selectAuthToken } from '../../slice/auth/selector';
-import { store } from '../..';
+import { AppStore } from '../..';
+
+let scopedStore: AppStore | undefined;
+
+export function configureTokenInterceptor(s: AppStore) {
+  scopedStore = s;
+}
 
 export function addTokenInterceptor(instance: AxiosInstance) {
   instance.interceptors.request.use((config) => {
-    const token = selectAuthToken(store.getState());
+    const token = scopedStore
+      ? selectAuthToken(scopedStore.getState())
+      : undefined;
     if (token !== undefined) {
       config.headers['X-Token'] = token;
     }

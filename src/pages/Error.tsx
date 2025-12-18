@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useError } from '../domain/error/hooks/useError';
+import { useError } from '../domain/error/hooks/use-error';
 
 export function Error() {
   const navigate = useNavigate();

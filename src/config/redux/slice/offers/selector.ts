@@ -2,8 +2,9 @@ import { createSelector } from '@reduxjs/toolkit';
 import { State } from '../..';
 import { OfferDetails, OfferMeta } from '../../../../domain/offer';
 import { getEmptyQueryState, ThunkQuery } from '../../thunk';
+import { OffersSliceState } from './state';
 
-export const selectOffersState = (s: State) => s.offers;
+export const selectOffersState = (s: { offers: OffersSliceState }) => s.offers;
 
 export const selectOffersQuery = createSelector(
   [selectOffersState],
@@ -36,7 +37,7 @@ export const selectNearbyOffers = createSelector(
       : getEmptyQueryState<OfferMeta[]>()
 );
 
-export const selectFavoriteOffersState = (s: State) =>
+export const selectFavoriteOffersState = (s: { offers: OffersSliceState }) =>
   selectOffersState(s).favoriteOffers;
 
 export const selectFavoriteOffers = createSelector(
@@ -45,5 +46,6 @@ export const selectFavoriteOffers = createSelector(
     favoriteOffers ? favoriteOffers : getEmptyQueryState<OfferMeta[]>()
 );
 
-export const selectFavoriteOfferChangeState = (s: State) =>
-  s.offers.favoriteOfferChangeState;
+export const selectFavoriteOfferChangeState = (s: {
+  offers: OffersSliceState;
+}) => s.offers.favoriteOfferChangeState;

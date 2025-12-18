@@ -14,11 +14,14 @@ export const selectUniqueCities = createSelector([selectOffers], (offers) =>
 
 export const selectCitiesQuery = createSelector(
   [selectUniqueCities, selectOffersQuery],
-  (data, { isLoading, isError, isFetched, error }) => ({
-    data,
-    isFetched,
-    isLoading,
-    isError,
-    error,
-  })
+  (data, { isLoading, isError, isFetched, error }) => {
+    const isCitiesLoading = isLoading || (!isError && !isFetched);
+    return {
+      data: isCitiesLoading ? undefined : data,
+      isFetched,
+      isLoading: isCitiesLoading,
+      isError,
+      error,
+    };
+  }
 );
