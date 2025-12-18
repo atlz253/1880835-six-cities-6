@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { createOnChangeHandler } from '../../../../utils/react/form/createOnChangeHandler';
 import { Credentials } from '../../types';
 import { login } from '../../features/login';
@@ -9,6 +9,7 @@ export function AuthForm() {
     email: '',
     password: '',
   });
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const onChange = createOnChangeHandler((builder) =>
     builder
@@ -26,6 +27,7 @@ export function AuthForm() {
       action="#"
       method="post"
       data-testid="auth-form"
+      ref={formRef}
     >
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">E-mail</label>
@@ -58,7 +60,11 @@ export function AuthForm() {
         type="submit"
         onClick={preventDefault(() => login(credentials))}
         data-testid="login-button"
-        disabled={credentials.email === '' || credentials.password === ''}
+        disabled={
+          credentials.email === '' ||
+          credentials.password === '' ||
+          !formRef.current?.checkValidity()
+        }
       >
         Sign in
       </button>

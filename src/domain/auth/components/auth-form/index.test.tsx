@@ -72,4 +72,17 @@ describe(AuthForm.name, () => {
     fireEvent.change(emailInput, { target: { value: '' } });
     expect(loginButton.hasAttribute('disabled')).toEqual(true);
   });
+
+  test('sign in button should be disabled if email no valid', () => {
+    const credentials = getCredentialsMock();
+    render(<AuthForm />);
+    const emailInput = screen.getByTestId('email-input');
+    const passwordInput = screen.getByTestId('password-input');
+    const loginButton = screen.getByTestId('login-button');
+    fireEvent.change(emailInput, { target: { value: 'invalid email' } });
+    fireEvent.change(passwordInput, {
+      target: { value: credentials.password },
+    });
+    expect(loginButton.hasAttribute('disabled')).toEqual(true);
+  });
 });
