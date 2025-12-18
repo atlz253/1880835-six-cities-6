@@ -1,4 +1,4 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../../domain/ui/components/header';
 import routes from '../../domain/router/constants/ROUTES';
 import classNames from 'classnames';
@@ -16,6 +16,7 @@ import CardList from '../../domain/offer/components/card-list';
 import { useAuthStatus } from '../../domain/auth';
 import { removeOfferWithIdFromFavorites } from '../../domain/offer/features/removeOfferWithIdFromFavorites';
 import { addOfferWithIdToFavorites } from '../../domain/offer/features/addOfferWithIdToFavorites';
+import ROUTES from '../../domain/router/constants/ROUTES';
 
 export function Offer() {
   useAuthCheck();
@@ -27,6 +28,18 @@ export function Offer() {
       limit: 3,
     });
   const isAuth = useAuthStatus();
+  const navigate = useNavigate();
+  const onFavoriteButtonClick = () => {
+    if (offer === undefined) {
+      navigate(ROUTES.error);
+    } else if (!isAuth) {
+      navigate(ROUTES.login);
+    } else if (offer.isFavorite) {
+      removeOfferWithIdFromFavorites(offer.id);
+    } else {
+      addOfferWithIdToFavorites(offer.id);
+    }
+  };
 
   if (isLoading || offer === undefined) {
     return <Loader />;
@@ -64,28 +77,20 @@ export function Offer() {
               )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offer.title}</h1>
-                {isAuth && (
-                  <button
-                    className={classNames(
-                      'offer__bookmark-button button',
-                      offer.isFavorite ? 'offer__bookmark-button--active' : null
-                    )}
-                    type="button"
-                    onClick={() =>
-                      offer.isFavorite
-                        ? removeOfferWithIdFromFavorites(offer.id)
-                        : addOfferWithIdToFavorites(offer.id)}
-                  >
-                    <svg
-                      className="offer__bookmark-icon"
-                      width={31}
-                      height={33}
-                    >
-                      <use xlinkHref="#icon-bookmark" />
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
-                )}
+                <button
+                  className={classNames(
+                    'offer__bookmark-button button',
+                    offer.isFavorite ? 'offer__bookmark-button--active' : null
+                  )}
+                  type="button"
+                  onClick={onFavoriteButtonClick}
+                  data-testid="favorites-button"
+                >
+                  <svg className="offer__bookmark-icon" width={31} height={33}>
+                    <use xlinkHref="#icon-bookmark" />
+                  </svg>
+                  <span className="visually-hidden">To bookmarks</span>
+                </button>
               </div>
               <Rating
                 rating={offer.rating}
