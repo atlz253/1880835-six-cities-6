@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import routes from '../constants/ROUTES';
-import { Login } from '../../../pages/Login';
-import { Main } from '../../../pages/Main';
-import { Offer } from '../../../pages/Offer';
-import { Favorites } from '../../../pages/Favorites';
+import { Login } from '../../../pages/login';
+import { Main } from '../../../pages/main';
+import { Offer } from '../../../pages/offer';
+import { Favorites } from '../../../pages/favorites';
 import { Page404 } from '../../../pages/404';
 import { PrivateRoute } from './private-route';
-import { Error } from '../../../pages/Error';
+import { Error } from '../../../pages/error';
 
 export function AppRoutes() {
   return (

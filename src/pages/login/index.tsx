@@ -1,10 +1,10 @@
 import { Link, Navigate } from 'react-router-dom';
-import { AuthForm } from '../domain/auth/components/auth-form';
-import { useAuthQuery } from '../domain/auth/hooks/use-auth-query';
-import ROUTES from '../domain/router/constants/ROUTES';
-import { setErrorMessage } from '../domain/error/features/setErrorMessage';
-import { isValidationError } from '../config/redux/thunk';
-import { Loader } from '../domain/ui/components/Loader';
+import { AuthForm } from '../../domain/auth/components/auth-form';
+import { useAuthQuery } from '../../domain/auth/hooks/use-auth-query';
+import ROUTES from '../../domain/router/constants/ROUTES';
+import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
+import { isValidationError } from '../../config/redux/thunk';
+import { Loader } from '../../domain/ui/components/Loader';
 
 export function Login() {
   const { isLoading, isFetched, isError, error } = useAuthQuery();

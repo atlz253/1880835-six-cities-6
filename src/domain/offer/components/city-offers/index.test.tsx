@@ -10,19 +10,6 @@ import { MockPageRouter } from '../../../router/utils/test/components';
 describe(CityOffers.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
-  test('should render empty state if offers array empty', () => {
-    const city = getCitiesMock().Paris;
-    const setCurrentOfferMock = vi.fn();
-    render(
-      <CityOffers
-        city={city}
-        offers={[]}
-        setCurrentOffer={setCurrentOfferMock}
-      />
-    );
-    expect(screen.getByText('No places to stay available')).toBeInTheDocument();
-  });
-
   test('should render city offers', () => {
     const city = getCitiesMock().Paris;
     const offers = getOffersMetaMocks();

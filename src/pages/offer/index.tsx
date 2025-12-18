@@ -1,21 +1,21 @@
 import { Navigate, useParams } from 'react-router-dom';
-import { Header } from '../domain/ui/components/header';
-import routes from '../domain/router/constants/ROUTES';
+import { Header } from '../../domain/ui/components/header';
+import routes from '../../domain/router/constants/ROUTES';
 import classNames from 'classnames';
-import { Rating } from '../domain/rating/components/rating';
-import offerRatingClassNames from '../domain/offer/constants/offerRatingClassNames';
-import { CommentsSection } from '../domain/comment/components/comments-section';
-import { Map } from '../domain/map';
-import { Loader } from '../domain/ui/components/Loader';
-import { useOfferQuery } from '../domain/offer/hooks/use-offer-query';
-import { useNearbyOffersQuery } from '../domain/offer/hooks/use-nearby-offers-query';
-import { setErrorMessage } from '../domain/error/features/setErrorMessage';
-import { useAuthCheck } from '../domain/auth/hooks/use-auth-check';
-import ERROR_TYPES from '../config/redux/thunk/constants/ERROR_TYPES';
-import CardList from '../domain/offer/components/card-list';
-import { useAuthStatus } from '../domain/auth';
-import { removeOfferWithIdFromFavorites } from '../domain/offer/features/removeOfferWithIdFromFavorites';
-import { addOfferWithIdToFavorites } from '../domain/offer/features/addOfferWithIdToFavorites';
+import { Rating } from '../../domain/rating/components/rating';
+import offerRatingClassNames from '../../domain/offer/constants/offerRatingClassNames';
+import { CommentsSection } from '../../domain/comment/components/comments-section';
+import { Map } from '../../domain/map';
+import { Loader } from '../../domain/ui/components/Loader';
+import { useOfferQuery } from '../../domain/offer/hooks/use-offer-query';
+import { useNearbyOffersQuery } from '../../domain/offer/hooks/use-nearby-offers-query';
+import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
+import { useAuthCheck } from '../../domain/auth/hooks/use-auth-check';
+import ERROR_TYPES from '../../config/redux/thunk/constants/ERROR_TYPES';
+import CardList from '../../domain/offer/components/card-list';
+import { useAuthStatus } from '../../domain/auth';
+import { removeOfferWithIdFromFavorites } from '../../domain/offer/features/removeOfferWithIdFromFavorites';
+import { addOfferWithIdToFavorites } from '../../domain/offer/features/addOfferWithIdToFavorites';
 
 export function Offer() {
   useAuthCheck();

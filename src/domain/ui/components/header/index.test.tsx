@@ -48,10 +48,9 @@ describe(Header.name, () => {
     render(
       <Provider store={store}>
         <MockRouter>
-          <CurrentLocation />
           <Routes>
             <Route path={ROUTES.cities} element={<Header />} />
-            <Route path={ROUTES.login} />
+            <Route path={ROUTES.login} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>
@@ -91,7 +90,12 @@ describe(Header.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockPageRouter path="/" element={<Header />} />
+        <MockRouter>
+          <Routes>
+            <Route path="/" element={<Header />} />
+            <Route path={ROUTES.login} element={<CurrentLocation />} />
+          </Routes>
+        </MockRouter>
       </Provider>
     );
     const signOutButton = screen.getByText('Sign out');
@@ -111,10 +115,9 @@ describe(Header.name, () => {
     render(
       <Provider store={store}>
         <MockRouter>
-          <CurrentLocation />
           <Routes>
             <Route path={ROUTES.cities} element={<Header />} />
-            <Route path={ROUTES.favorites} />
+            <Route path={ROUTES.favorites} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>

@@ -98,13 +98,12 @@ describe(Card.name, () => {
     render(
       <Provider store={store}>
         <MockRouter>
-          <CurrentLocation />
           <Routes>
             <Route
               path={ROUTES.cities}
               element={<Card offer={offer} imageURL={offer.images[0]} />}
             />
-            <Route path={ROUTES.login} />
+            <Route path={ROUTES.login} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>
