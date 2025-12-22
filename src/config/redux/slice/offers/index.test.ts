@@ -7,16 +7,16 @@ import {
   removeOfferFromFavoritesThunk,
 } from '.';
 import { getEmptyState } from './state';
-import { ENDPOINTS } from '../../../axios';
-import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
-import { getOffersMetaMocks } from '../../../../domain/offer/mocks/get-offers-meta-mocks';
-import { getOfferDetailsMock } from '../../../../domain/offer/mocks/get-offer-details-mock';
+import { ApiEndpoints } from '../../../axios';
+import HTTPStatuses from '../../../axios/constants/http-statuses';
 import { expectFulfilledThunkValue } from '../../utils/test';
-import { OfferMeta } from '../../../../domain/offer';
+import { OfferMeta } from '../../../../components/offer';
 import { getApiMock } from '../../../axios/utils/test';
 import { getMockStoreCreator } from '../../utils/test';
-import { getAuthMock } from '../../../../domain/auth/mock/get-auth-mock';
+import { getAuthMock } from '../../../../components/auth/mock/get-auth-mock';
 import { getFulfilledState } from '../../thunk';
+import { getOfferDetailsMock } from '../../../../components/offer/mocks/get-offer-details-mock';
+import { getOffersMetaMocks } from '../../../../components/offer/mocks/get-offers-meta-mocks';
 
 describe('offers slice', () => {
   const apiMock = getApiMock();
@@ -30,7 +30,7 @@ describe('offers slice', () => {
   describe('offers thunk', () => {
     test('should fetch offers on fulfilled', async () => {
       const offers = getOffersMetaMocks();
-      apiMock.onGet(ENDPOINTS.offers).replyOnce(HTTP_STATUS.ok, offers);
+      apiMock.onGet(ApiEndpoints.offers).replyOnce(HTTPStatuses.ok, offers);
       await store.dispatch(offersThunk());
       expectFulfilledThunkValue({
         store: store,
@@ -43,7 +43,7 @@ describe('offers slice', () => {
   describe('offer thunk', () => {
     test('should fetch offer on fulfilled', async () => {
       const offer = getOfferDetailsMock();
-      apiMock.onGet(ENDPOINTS.offer(offer.id)).replyOnce(HTTP_STATUS.ok, offer);
+      apiMock.onGet(ApiEndpoints.offer(offer.id)).replyOnce(HTTPStatuses.ok, offer);
       await store.dispatch(offerThunk(offer.id));
       expectFulfilledThunkValue({
         store: store,
@@ -58,8 +58,8 @@ describe('offers slice', () => {
       const offerId = 'test';
       const nearbyOffers = getOffersMetaMocks();
       apiMock
-        .onGet(ENDPOINTS.nearbyOffers(offerId))
-        .replyOnce(HTTP_STATUS.ok, nearbyOffers);
+        .onGet(ApiEndpoints.nearbyOffers(offerId))
+        .replyOnce(HTTPStatuses.ok, nearbyOffers);
       await store.dispatch(nearbyOffersThunk(offerId));
       expectFulfilledThunkValue({
         store: store,
@@ -77,8 +77,8 @@ describe('offers slice', () => {
       });
       const favoriteOffers = getOffersMetaMocks();
       apiMock
-        .onGet(ENDPOINTS.favorite)
-        .replyOnce(HTTP_STATUS.ok, favoriteOffers);
+        .onGet(ApiEndpoints.favorite)
+        .replyOnce(HTTPStatuses.ok, favoriteOffers);
       await storeWithAuth.dispatch(favoriteOffersThunk());
       expectFulfilledThunkValue({
         store: storeWithAuth,
@@ -96,12 +96,12 @@ describe('offers slice', () => {
       };
       apiMock
         .onPost(
-          ENDPOINTS.offerFavoriteState({
+          ApiEndpoints.offerFavoriteState({
             offerId: offerMeta.id,
             isFavorite: true,
           })
         )
-        .replyOnce(HTTP_STATUS.ok, { ...offerMeta, isFavorite: true });
+        .replyOnce(HTTPStatuses.ok, { ...offerMeta, isFavorite: true });
       await store.dispatch(addOfferToFavoritesThunk(offerMeta.id));
       expectFulfilledThunkValue({
         store: store,
@@ -119,12 +119,12 @@ describe('offers slice', () => {
       };
       apiMock
         .onPost(
-          ENDPOINTS.offerFavoriteState({
+          ApiEndpoints.offerFavoriteState({
             offerId: offerMeta.id,
             isFavorite: false,
           })
         )
-        .replyOnce(HTTP_STATUS.ok, { ...offerMeta, isFavorite: false });
+        .replyOnce(HTTPStatuses.ok, { ...offerMeta, isFavorite: false });
       await store.dispatch(removeOfferFromFavoritesThunk(offerMeta.id));
       expectFulfilledThunkValue({
         store: store,

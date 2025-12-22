@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import SLICE_NAMES from '../../constants/SLICE_NAMES';
+import SliceNames from '../../constants/slice-names';
 import { getEmptyState } from './state';
 import { offerCommentsThunk, postCommentThunk } from './action';
 import {
@@ -8,10 +8,10 @@ import {
   getPendingState,
   getRejectedState,
 } from '../../thunk';
-import { PostedComment } from '../../../../domain/comment';
+import { PostedComment } from '../../../../components/comment/types';
 
 export const commentsSlice = createSlice({
-  name: SLICE_NAMES.comments,
+  name: SliceNames.comments,
   initialState: getEmptyState(),
   reducers: {
     resetCommentPostQueryAction(s) {

@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { State } from '../..';
 import { getEmptyQueryState, ThunkQuery } from '../../thunk';
-import { PostedComment } from '../../../../domain/comment';
+import { PostedComment } from '../../../../components/comment';
 
 export const selectCommentsState = (s: State) => s.comments;
 

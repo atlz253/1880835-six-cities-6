@@ -1,15 +1,15 @@
-import { ENDPOINTS } from '../../../axios';
-import { OfferDetails, OfferMeta } from '../../../../domain/offer';
+import { ApiEndpoints } from '../../../axios';
+import { OfferDetails, OfferMeta } from '../../../../components/offer';
 import {
   createAppAsyncThunk,
   getErrorTypeByHTTPStatus,
   getRejectValue,
   serializeError,
 } from '../../thunk';
-import ACTION_NAMES from './constants/ACTION_NAMES';
+import ActionNames from './constants/action-names';
 import { isAxiosError } from 'axios';
-import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
-import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
+import HTTPStatuses from '../../../axios/constants/http-statuses';
+import ErrorTypes from '../../thunk/constants/error-types';
 import { selectAuthStatus } from '../auth/selector';
 import {
   selectFavoriteOfferChangeState,
@@ -23,10 +23,10 @@ export const offersThunk = createAppAsyncThunk<
   void,
   { offers: OffersSliceState }
 >(
-  ACTION_NAMES.offers,
+  ActionNames.offers,
   async (_: void, { rejectWithValue, extra: { getApi } }) => {
     try {
-      return (await getApi().get<OfferMeta[]>(ENDPOINTS.offers)).data;
+      return (await getApi().get<OfferMeta[]>(ApiEndpoints.offers)).data;
     } catch (error) {
       return rejectWithValue(getRejectValue(error));
     }
@@ -46,22 +46,22 @@ export const offerThunk = createAppAsyncThunk<
   string | undefined,
   { offers: OffersSliceState }
 >(
-  ACTION_NAMES.offer,
+  ActionNames.offer,
   async (
     offerID: string | undefined,
     { rejectWithValue, extra: { getApi } }
   ) => {
     try {
       return (
-        await getApi().get<OfferDetails>(ENDPOINTS.offer(offerID as string))
+        await getApi().get<OfferDetails>(ApiEndpoints.offer(offerID as string))
       ).data;
     } catch (error) {
       if (
         isAxiosError(error) &&
-        error.response?.status === HTTP_STATUS.notFound
+        error.response?.status === HTTPStatuses.notFound
       ) {
         return rejectWithValue({
-          type: ERROR_TYPES.notFound,
+          type: ErrorTypes.notFound,
           cause: { message: `Offer with ID ${offerID} not found` },
         });
       } else {
@@ -88,7 +88,7 @@ export const nearbyOffersThunk = createAppAsyncThunk<
   string | undefined,
   { offers: OffersSliceState }
 >(
-  ACTION_NAMES.nearbyOffers,
+  ActionNames.nearbyOffers,
   async (
     offerID: string | undefined,
     { rejectWithValue, extra: { getApi } }
@@ -96,16 +96,16 @@ export const nearbyOffersThunk = createAppAsyncThunk<
     try {
       return (
         await getApi().get<OfferMeta[]>(
-          ENDPOINTS.nearbyOffers(offerID as string)
+          ApiEndpoints.nearbyOffers(offerID as string)
         )
       ).data;
     } catch (error) {
       if (
         isAxiosError(error) &&
-        error.response?.status === HTTP_STATUS.notFound
+        error.response?.status === HTTPStatuses.notFound
       ) {
         return rejectWithValue({
-          type: ERROR_TYPES.notFound,
+          type: ErrorTypes.notFound,
           cause: {
             message: `Nearby offers not found for offer with ID ${offerID}`,
           },
@@ -134,10 +134,10 @@ export const favoriteOffersThunk = createAppAsyncThunk<
   void,
   { offers: OffersSliceState; auth: AuthSliceState }
 >(
-  ACTION_NAMES.favoriteOffers,
+  ActionNames.favoriteOffers,
   async (_, { rejectWithValue, extra: { getApi } }) => {
     try {
-      return (await getApi().get<OfferMeta[]>(ENDPOINTS.favorite)).data;
+      return (await getApi().get<OfferMeta[]>(ApiEndpoints.favorite)).data;
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         return rejectWithValue({
@@ -164,12 +164,12 @@ export const addOfferToFavoritesThunk = createAppAsyncThunk<
   string,
   { offers: OffersSliceState }
 >(
-  ACTION_NAMES.addOfferToFavorites,
+  ActionNames.addOfferToFavorites,
   async (offerId, { rejectWithValue, extra: { getApi } }) => {
     try {
       return (
         await getApi().post<OfferMeta>(
-          ENDPOINTS.offerFavoriteState({ offerId, isFavorite: true })
+          ApiEndpoints.offerFavoriteState({ offerId, isFavorite: true })
         )
       ).data;
     } catch (error) {
@@ -201,12 +201,12 @@ export const removeOfferFromFavoritesThunk = createAppAsyncThunk<
   string,
   { offers: OffersSliceState }
 >(
-  ACTION_NAMES.removeOfferToFavorites,
+  ActionNames.removeOfferToFavorites,
   async (offerId, { rejectWithValue, extra: { getApi } }) => {
     try {
       return (
         await getApi().post<OfferMeta>(
-          ENDPOINTS.offerFavoriteState({ offerId, isFavorite: false })
+          ApiEndpoints.offerFavoriteState({ offerId, isFavorite: false })
         )
       ).data;
     } catch (error) {

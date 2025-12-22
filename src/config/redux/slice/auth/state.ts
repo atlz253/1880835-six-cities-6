@@ -1,4 +1,4 @@
-import { Auth } from '../../../../domain/auth/types';
+import { Auth } from '../../../../components/auth/types';
 import { ThunkQuery } from '../../thunk';
 
 export interface AuthSliceState {

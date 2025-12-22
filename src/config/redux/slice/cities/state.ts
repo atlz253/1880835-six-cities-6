@@ -1,5 +1,5 @@
-import { City } from '../../../../domain/city';
-import defaultCity from '../../../../domain/city/constants/default-city';
+import defaultCity from '../../../../components/city/constants/default-city';
+import { City } from '../../../../components/city/types';
 
 interface CitiesSliceState {
   currentCity: City;

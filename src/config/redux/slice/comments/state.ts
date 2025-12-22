@@ -1,4 +1,4 @@
-import { PostedComment } from '../../../../domain/comment';
+import { PostedComment } from '../../../../components/comment';
 import { getEmptyQueryState, ThunkQuery } from '../../thunk';
 
 export interface CommentsSliceState {

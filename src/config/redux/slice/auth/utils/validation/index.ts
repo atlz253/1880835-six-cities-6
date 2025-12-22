@@ -1,1 +1,1 @@
-export * from './isAuthData';
+export * from './is-auth-data';

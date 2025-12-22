@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { State } from '../..';
-import { OfferDetails, OfferMeta } from '../../../../domain/offer';
+import { OfferDetails, OfferMeta } from '../../../../components/offer';
 import { getEmptyQueryState, ThunkQuery } from '../../thunk';
 import { OffersSliceState } from './state';
 
