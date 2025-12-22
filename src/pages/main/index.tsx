@@ -32,8 +32,8 @@ export function Main() {
     () =>
       currentCity
         ? currentCityOffers
-            .filter((o) => o.city.name === currentCity.name)
-            .map((o) => o.location)
+          .filter((o) => o.city.name === currentCity.name)
+          .map((o) => o.location)
         : [],
     [currentCity, currentCityOffers]
   );
