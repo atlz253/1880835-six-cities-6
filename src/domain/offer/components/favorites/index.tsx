@@ -6,6 +6,7 @@ import { Loader } from '../../../ui/components/Loader';
 import { setErrorMessage } from '../../../error/features/setErrorMessage';
 import { Navigate } from 'react-router-dom';
 import ROUTES from '../../../router/constants/ROUTES';
+import classNames from 'classnames';
 
 export function Favorites() {
   const { data: offers, isLoading, isError, error } = useFavoriteOffersQuery();
@@ -18,6 +19,7 @@ export function Favorites() {
     );
     return result;
   }, [offers]);
+  const isFavoritesEmpty = offers === undefined || offers.length === 0;
 
   if (isLoading) {
     return <Loader />;
@@ -29,31 +31,50 @@ export function Favorites() {
   }
 
   return (
-    <section className="favorites">
-      <h1 className="favorites__title">Saved listing</h1>
-      <ul className="favorites__list">
-        {Object.entries(citiesOffers).map(([city, cityOffers]) => (
-          <li className="favorites__locations-items" key={city}>
-            <div className="favorites__locations locations locations--current">
-              <div className="locations__item">
-                <a className="locations__item-link" href="#">
-                  <span>{city}</span>
-                </a>
-              </div>
-            </div>
-            <div className="favorites__places">
-              {cityOffers.map((offer) => (
-                <Card
-                  key={offer.id}
-                  offer={offer}
-                  imageURL={offer.previewImage}
-                  variant="favorites"
-                />
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
+    <section
+      className={classNames(
+        'favorites',
+        isFavoritesEmpty && 'favorites--empty'
+      )}
+    >
+      {isFavoritesEmpty ? (
+        <>
+          <h1 className="visually-hidden">Favorites (empty)</h1>
+          <div className="favorites__status-wrapper">
+            <b className="favorites__status">Nothing yet saved.</b>
+            <p className="favorites__status-description">
+              Save properties to narrow down search or plan your future trips.
+            </p>
+          </div>
+        </>
+      ) : (
+        <>
+          <h1 className="favorites__title">Saved listing</h1>
+          <ul className="favorites__list">
+            {Object.entries(citiesOffers).map(([city, cityOffers]) => (
+              <li className="favorites__locations-items" key={city}>
+                <div className="favorites__locations locations locations--current">
+                  <div className="locations__item">
+                    <a className="locations__item-link" href="#">
+                      <span>{city}</span>
+                    </a>
+                  </div>
+                </div>
+                <div className="favorites__places">
+                  {cityOffers.map((offer) => (
+                    <Card
+                      key={offer.id}
+                      offer={offer}
+                      imageURL={offer.previewImage}
+                      variant="favorites"
+                    />
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   );
 }

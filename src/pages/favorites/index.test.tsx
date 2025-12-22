@@ -12,7 +12,7 @@ import { MockAppRouter } from '../../domain/router/utils/test/components';
 describe(Favorites.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
-  test(`should render favorites page on ${ROUTES.favorites}`, async () => {
+  test(`should render favorites page on ${ROUTES.favorites}`, () => {
     const auth = getAuthMock();
     const offers = getOffersMetaMocks();
     const store = mockStoreCreator({
@@ -24,6 +24,20 @@ describe(Favorites.name, () => {
         <MockAppRouter initialEntries={[ROUTES.favorites]} />
       </Provider>
     );
-    expect(await screen.findByTestId('favorites-page')).toBeInTheDocument();
+    expect(screen.getByTestId('favorites-page')).toBeInTheDocument();
+  });
+
+  test('should empty state if favorite offers not present', () => {
+    const auth = getAuthMock();
+    const store = mockStoreCreator({
+      auth: { status: true, auth: getFulfilledState(auth) },
+      offers: { ...getEmptyState(), offers: getFulfilledState([]) },
+    });
+    render(
+      <Provider store={store}>
+        <MockAppRouter initialEntries={[ROUTES.favorites]} />
+      </Provider>
+    );
+    expect(screen.getByText('Nothing yet saved.')).toBeInTheDocument();
   });
 });

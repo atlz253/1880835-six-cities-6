@@ -6,6 +6,7 @@ import { Link, Navigate } from 'react-router-dom';
 import routes from '../../domain/router/constants/ROUTES';
 import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
 import { useAuthCheck } from '../../domain/auth/hooks/use-auth-check';
+import classNames from 'classnames';
 
 export function Favorites() {
   useAuthCheck();
@@ -23,7 +24,12 @@ export function Favorites() {
   return (
     <div className="page" data-testid="favorites-page">
       <Header />
-      <main className="page__main page__main--favorites">
+      <main
+        className={classNames(
+          'page__main page__main--favorites',
+          offers.length === 0 && 'page__main--favorites-empty'
+        )}
+      >
         <div className="page__favorites-container container">
           <FavoritesView />
         </div>
