@@ -26,9 +26,11 @@ export function CommentsSection({
   );
   const sortedComments = useMemo(
     () =>
-      comments?.toSorted(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-      ),
+      comments
+        ?.slice()
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        ),
     [comments]
   );
   const limitedAndSortedComments = useMemo(
