@@ -1,6 +1,7 @@
 import axios from 'axios';
 import ENDPOINTS from './constants/ENDPOINTS.ts';
 import { addTokenInterceptor } from '../redux/utils/axios/addTokenInterceptor.ts';
+import { addAlertNetworkErrorInterceptor } from './interceptors/add-alert-network-error-interceptor.ts';
 
 function getApi() {
   const result = axios.create({
@@ -9,6 +10,7 @@ function getApi() {
   });
 
   addTokenInterceptor(result);
+  addAlertNetworkErrorInterceptor(result);
 
   return result;
 }
