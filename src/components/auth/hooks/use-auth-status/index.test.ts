@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { useAuthStatus } from '.';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { getEmptyState } from '../../../../config/redux/slice/auth/state';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 
 describe(useAuthStatus.name, () => {
   const mockStoreCreator = getMockStoreCreator();

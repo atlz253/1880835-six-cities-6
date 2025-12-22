@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { useNearbyOffersQuery } from '.';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 import { getEmptyState } from '../../../../config/redux/slice/offers/state';
 import { extractActionTypes } from '../../../../config/redux/utils/action';
 import { nearbyOffersThunk } from '../../../../config/redux/slice/offers';

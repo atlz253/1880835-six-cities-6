@@ -4,7 +4,7 @@ import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { getEmptyQueryState } from '../../../../config/redux/thunk';
 import { Auth } from '../../types';
 import { getEmptyState } from '../../../../config/redux/slice/auth/state';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 
 describe(useAuthQuery.name, () => {
   const mockStoreCreator = getMockStoreCreator();

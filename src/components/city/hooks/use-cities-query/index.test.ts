@@ -1,7 +1,7 @@
 import { useCitiesQuery } from '.';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { renderHook } from '@testing-library/react';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 import { extractActionTypes } from '../../../../config/redux/utils/action';
 import { offersThunk } from '../../../../config/redux/slice/offers';
 import { getApiMock } from '../../../../config/axios/utils/test';

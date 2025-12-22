@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { useOffersQuery } from '.';
 import { getEmptyState } from '../../../../config/redux/slice/offers/state';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 import { extractActionTypes } from '../../../../config/redux/utils/action';
 import { offersThunk } from '../../../../config/redux/slice/offers';
 import { getFulfilledState } from '../../../../config/redux/thunk';

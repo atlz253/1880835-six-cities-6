@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { useCurrentCity } from '.';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { getEmptyState } from '../../../../config/redux/slice/cities/state';
 import defaultCity from '../../constants/default-city';

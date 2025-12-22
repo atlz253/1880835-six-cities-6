@@ -7,7 +7,7 @@ import { getApiMock } from '../../../../config/axios/utils/test';
 import { ENDPOINTS } from '../../../../config/axios';
 import HTTP_STATUS from '../../../../config/axios/constants/HTTP_STATUS';
 import { getFulfilledState } from '../../../../config/redux/thunk';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 import { getAuthMock } from '../../mock/get-auth-mock';
 
 describe(useAuthCheck.name, () => {

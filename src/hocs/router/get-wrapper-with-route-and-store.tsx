@@ -1,6 +1,6 @@
 import { Store } from '@reduxjs/toolkit';
-import { getProviderWrapperWithStore } from '../../../../../config/redux/utils/test/get-provider-wrapper-with-store';
-import { MockPageRouter } from './mock-router';
+import { getProviderWrapperWithStore } from '../redux/get-provider-wrapper-with-store';
+import { MockPageRouter } from '../../components/router/utils/test/components/mock-router';
 import { ReactNode } from 'react';
 
 export function getRouterPageWrapper({

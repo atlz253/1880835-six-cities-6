@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { useFavoriteOffersQuery } from '.';
-import { getProviderWrapperWithStore } from '../../../../config/redux/utils/test/get-provider-wrapper-with-store';
+import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider-wrapper-with-store';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { getEmptyState as getEmptyOffersState } from '../../../../config/redux/slice/offers/state';
 import { extractActionTypes } from '../../../../config/redux/utils/action';
