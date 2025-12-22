@@ -1,4 +1,4 @@
-import cityNames from '../constants/cityNames';
+import cityNames from '../constants/city-names';
 import { City } from '../types';
 
 export function getCitiesMock() {

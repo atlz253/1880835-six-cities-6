@@ -1,21 +1,21 @@
-import { ENDPOINTS, ValidationErrorResponse } from '../../../axios';
+import { ApiEndpoints, ValidationErrorResponse } from '../../../axios';
 import { selectAuthState, selectAuthToken } from './selector';
 import { resetStateAction } from '../../utils/resetState';
 import { isAxiosError } from 'axios';
-import ACTION_NAMES from './constants/ACTION_NAMES';
+import ActionNames from './constants/action-names';
 import {
   createAppAsyncThunk,
   getRejectValue,
   serializeError,
 } from '../../thunk';
-import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
-import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
-import LOCAL_STORAGE from './constants/local-storage';
+import HTTPStatuses from '../../../axios/constants/http-statuses';
+import ErrorTypes from '../../thunk/constants/error-types';
+import LocalStorage from './constants/local-storage';
 import { AuthSliceState } from './state';
 import { Auth, Credentials } from '../../../../components/auth/types';
 
 export const signOutThunk = createAppAsyncThunk<void>(
-  ACTION_NAMES.signOut,
+  ActionNames.signOut,
   (_, { dispatch }) => {
     dispatch(resetStateAction());
     localStorage.clear();
@@ -27,22 +27,22 @@ export const checkLoginThunk = createAppAsyncThunk<
   void,
   { auth: AuthSliceState }
 >(
-  ACTION_NAMES.loginCheck,
+  ActionNames.loginCheck,
   async (_, { rejectWithValue, getState, dispatch, extra: { getApi } }) => {
     const token = selectAuthToken(getState());
     if (token === undefined) {
       return undefined;
     }
     try {
-      return (await getApi().get<Auth>(ENDPOINTS.login)).data;
+      return (await getApi().get<Auth>(ApiEndpoints.login)).data;
     } catch (error) {
       if (
         isAxiosError(error) &&
-        error.response?.status === HTTP_STATUS.unauthorized
+        error.response?.status === HTTPStatuses.unauthorized
       ) {
         dispatch(signOutThunk());
         return rejectWithValue({
-          type: ERROR_TYPES.unauthorized,
+          type: ErrorTypes.unauthorized,
           cause: serializeError(error),
         });
       } else {
@@ -59,23 +59,23 @@ export const checkLoginThunk = createAppAsyncThunk<
 );
 
 export const loginThunk = createAppAsyncThunk<Auth, Credentials>(
-  ACTION_NAMES.login,
+  ActionNames.login,
   async (credentials, { rejectWithValue, dispatch, extra: { getApi } }) => {
     try {
-      const data = (await getApi().post<Auth>(ENDPOINTS.login, credentials))
+      const data = (await getApi().post<Auth>(ApiEndpoints.login, credentials))
         .data;
       dispatch(resetStateAction());
-      localStorage.setItem(LOCAL_STORAGE.auth, JSON.stringify(data));
-      localStorage.setItem(LOCAL_STORAGE.token, JSON.stringify(data.token));
+      localStorage.setItem(LocalStorage.auth, JSON.stringify(data));
+      localStorage.setItem(LocalStorage.token, JSON.stringify(data.token));
       return data;
     } catch (error) {
       if (
         isAxiosError(error) &&
         error.response &&
-        error.response.status === HTTP_STATUS.validationError
+        error.response.status === HTTPStatuses.validationError
       ) {
         return rejectWithValue({
-          type: ERROR_TYPES.validationFailed,
+          type: ErrorTypes.validationFailed,
           cause: {
             message: (error.response.data as ValidationErrorResponse).details
               .map((d) => d.messages.join())

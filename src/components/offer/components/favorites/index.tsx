@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import { setErrorMessage } from '../../../../components/error/features/setErrorMessage';
+import { setErrorMessage } from '../../../error/features/set-error-message';
 import { Navigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Card } from '../../../../components/offer/components/card';
 import { OfferMeta } from '../..';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import { Loader } from '../../../ui/components/loader';
 import { useFavoriteOffersQuery } from '../../hooks/use-favorite-offers-query';
 
@@ -27,7 +27,7 @@ export function Favorites() {
 
   if (isError) {
     setErrorMessage(error?.cause?.message);
-    return <Navigate to={ROUTES.error} />;
+    return <Navigate to={RouterPaths.error} />;
   }
 
   return (

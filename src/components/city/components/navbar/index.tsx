@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { useCurrentCity } from '../../hooks/use-current-city';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import { useCitiesQuery } from '../../hooks/use-cities-query';
 
 type NavbarVariant = 'locations';
@@ -38,7 +38,7 @@ export function Navbar({ variant }: { variant: NavbarVariant }) {
               classes.link,
               c.name === currentCity.name ? 'tabs__item--active' : null
             )}
-            to={ROUTES.city({ city: c.name })}
+            to={RouterPaths.city({ city: c.name })}
           >
             <span>{c.name}</span>
           </Link>

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectCitiesQuery } from '../../../../config/redux/slice/cities/selector';
-import { useAppDispatch } from '../../../../config/redux/hooks/useAppDispatch';
+import { useAppDispatch } from '../../../../config/redux/hooks/use-app-dispatch';
 import { useEffect } from 'react';
 import { offersThunk } from '../../../../config/redux/slice/offers';
 

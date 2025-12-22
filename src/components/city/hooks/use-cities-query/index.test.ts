@@ -5,8 +5,8 @@ import { getProviderWrapperWithStore } from '../../../../hocs/redux/get-provider
 import { extractActionTypes } from '../../../../config/redux/utils/action';
 import { offersThunk } from '../../../../config/redux/slice/offers';
 import { getApiMock } from '../../../../config/axios/utils/test';
-import { ENDPOINTS } from '../../../../config/axios';
-import HTTP_STATUS from '../../../../config/axios/constants/HTTP_STATUS';
+import { ApiEndpoints } from '../../../../config/axios';
+import HTTPStatuses from '../../../../config/axios/constants/http-statuses';
 import { getEmptyState } from '../../../../config/redux/slice/offers/state';
 import {
   getFulfilledState,
@@ -28,7 +28,7 @@ describe(useCitiesQuery.name, () => {
       wrapper: getProviderWrapperWithStore(store),
     });
     const offers = getOffersMetaMocks();
-    apiMock.onGet(ENDPOINTS.offers).replyOnce(HTTP_STATUS.ok, offers);
+    apiMock.onGet(ApiEndpoints.offers).replyOnce(HTTPStatuses.ok, offers);
     expect(extractActionTypes(store.getActions())).toEqual([
       offersThunk.pending.type,
     ]);

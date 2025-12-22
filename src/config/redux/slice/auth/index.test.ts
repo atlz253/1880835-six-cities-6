@@ -1,7 +1,7 @@
 import { getAuthMock } from '../../../../components/auth/mock/get-auth-mock';
 import { getCredentialsMock } from '../../../../components/auth/mock/get-credentials-mock';
-import { ENDPOINTS } from '../../../axios';
-import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
+import { ApiEndpoints } from '../../../axios';
+import HTTPStatuses from '../../../axios/constants/http-statuses';
 import { getApiMock } from '../../../axios/utils/test';
 import { getFulfilledState } from '../../thunk';
 import { extractActionTypes } from '../../utils/action';
@@ -43,7 +43,7 @@ describe('auth slice', () => {
       const storeWithAuth = mockStoreCreator({
         auth: { status: true, auth: getFulfilledState(auth) },
       });
-      apiMock.onGet(ENDPOINTS.login).replyOnce(HTTP_STATUS.ok, auth);
+      apiMock.onGet(ApiEndpoints.login).replyOnce(HTTPStatuses.ok, auth);
       await storeWithAuth.dispatch(checkLoginThunk());
       expectFulfilledThunkValue({
         store: storeWithAuth,
@@ -57,7 +57,7 @@ describe('auth slice', () => {
       const storeWithAuth = mockStoreCreator({
         auth: { status: true, auth: getFulfilledState(auth) },
       });
-      apiMock.onGet(ENDPOINTS.login).replyOnce(HTTP_STATUS.unauthorized);
+      apiMock.onGet(ApiEndpoints.login).replyOnce(HTTPStatuses.unauthorized);
       await storeWithAuth.dispatch(checkLoginThunk());
       expect(extractActionTypes(storeWithAuth.getActions())).toEqual([
         checkLoginThunk.pending.type,
@@ -73,7 +73,7 @@ describe('auth slice', () => {
     test('login should work', async () => {
       const auth = getAuthMock();
       const credentials = getCredentialsMock();
-      apiMock.onPost(ENDPOINTS.login).replyOnce(HTTP_STATUS.ok, auth);
+      apiMock.onPost(ApiEndpoints.login).replyOnce(HTTPStatuses.ok, auth);
       await store.dispatch(loginThunk(credentials));
       expect(extractActionTypes(store.getActions())).toEqual([
         loginThunk.pending.type,

@@ -1,1 +1,1 @@
-export * from './tryStringify';
+export * from './try-stringify';

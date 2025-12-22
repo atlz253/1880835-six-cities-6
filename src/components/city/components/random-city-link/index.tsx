@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useMemo } from 'react';
 import { getRandomItem } from '../../../../utils/array';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import { Loader } from '../../../ui/components/loader';
 import defaultCity from '../../constants/default-city';
 import { useCitiesQuery } from '../../hooks/use-cities-query';
@@ -22,7 +22,7 @@ export function RandomCityLink({ className }: { className?: string }) {
 
   return (
     <Link
-      to={ROUTES.city({ city: pickedCity.name })}
+      to={RouterPaths.city({ city: pickedCity.name })}
       className={className}
       data-testid="random-city-link"
     >

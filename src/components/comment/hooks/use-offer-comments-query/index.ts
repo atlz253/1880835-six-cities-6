@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../../../config/redux/hooks/useAppDispatch';
+import { useAppDispatch } from '../../../../config/redux/hooks/use-app-dispatch';
 import { offerCommentsThunk } from '../../../../config/redux/slice/comments/action';
 import { selectOfferCommentsQuery } from '../../../../config/redux/slice/comments/selector';
 import { ThunkQuery } from '../../../../config/redux/thunk';

@@ -1,2 +1,2 @@
-export * from './preventDefault';
-export * from './stopPropagation';
+export * from './prevent-default';
+export * from './stop-propagation';

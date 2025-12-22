@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../../../config/redux/hooks/useAppDispatch';
+import { useAppDispatch } from '../../../../config/redux/hooks/use-app-dispatch';
 import { favoriteOffersThunk } from '../../../../config/redux/slice/offers';
 import { useSelector } from 'react-redux';
 import { selectFavoriteOffers } from '../../../../config/redux/slice/offers/selector';

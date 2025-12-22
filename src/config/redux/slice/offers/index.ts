@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import SLICE_NAMES from '../../constants/SLICE_NAMES';
+import SliceNames from '../../constants/slice-names';
 import {
   addOfferToFavoritesThunk,
   favoriteOffersThunk,
@@ -16,7 +16,7 @@ import {
 } from '../../thunk';
 
 export const offersSlice = createSlice({
-  name: SLICE_NAMES.offers,
+  name: SliceNames.offers,
   initialState: getEmptyState(),
   reducers: {},
   extraReducers: (builder) =>

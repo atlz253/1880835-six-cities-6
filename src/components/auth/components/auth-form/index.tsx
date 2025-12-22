@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { createOnChangeHandler } from '../../../../utils/react/form/createOnChangeHandler';
+import { createOnChangeHandler } from '../../../../utils/react/form/create-on-change-handler';
 import { preventDefault } from '../../../../utils/event';
 import { isValidPassword } from '../../utils/password';
 import { Credentials } from '../../types';

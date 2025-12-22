@@ -1,10 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
-import routes from '../../../router/constants/ROUTES';
+import routes from '../../../router/constants/router-paths';
 import { useAuthStatus } from '../../../auth/hooks/use-auth-status';
 import { preventDefault } from '../../../../utils/event';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import { useAuthQuery } from '../../../auth/hooks/use-auth-query';
-import { signOut } from '../../../auth/features/signOut';
+import { signOut } from '../../../auth/features/sign-out';
 import { useFavoriteOffersQuery } from '../../../offer/hooks/use-favorite-offers-query';
 
 export function Header() {
@@ -15,7 +15,7 @@ export function Header() {
 
   const onSignOut = preventDefault(() => {
     signOut();
-    navigate(ROUTES.login);
+    navigate(RouterPaths.login);
   });
 
   return (

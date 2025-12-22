@@ -3,21 +3,24 @@ import { Header } from '.';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { Provider } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import { getEmptyState as getEmptyAuthState } from '../../../../config/redux/slice/auth/state';
 import { getEmptyState as getEmptyOffersState } from '../../../../config/redux/slice/offers/state';
 import { getAuthorizedStateMock } from '../../../../config/redux/slice/auth/utils/test';
 import { getFulfilledState } from '../../../../config/redux/thunk';
-import { signOut } from '../../../auth/features/signOut';
+import { signOut } from '../../../auth/features/sign-out';
 import { getOffersMetaMocks } from '../../../offer/mocks/get-offers-meta-mocks';
 import { CurrentLocation } from '../../../router/components/current-location';
-import { MockPageRouter, MockRouter } from '../../../router/utils/test/components';
+import {
+  MockPageRouter,
+  MockRouter,
+} from '../../../router/utils/test/components';
 
 describe(Header.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
   beforeAll(() => {
-    vi.mock('../../../../components/auth/features/signOut', () => ({
+    vi.mock('../../../auth/features/sign-out', () => ({
       signOut: vi.fn(),
     }));
   });
@@ -48,8 +51,8 @@ describe(Header.name, () => {
       <Provider store={store}>
         <MockRouter>
           <Routes>
-            <Route path={ROUTES.cities} element={<Header />} />
-            <Route path={ROUTES.login} element={<CurrentLocation />} />
+            <Route path={RouterPaths.cities} element={<Header />} />
+            <Route path={RouterPaths.login} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>
@@ -57,7 +60,7 @@ describe(Header.name, () => {
     const loginButton = screen.getByText('Sign in');
     fireEvent.click(loginButton);
     const currentLocation = screen.getByTestId(CurrentLocation.testId);
-    expect(currentLocation.textContent).toEqual(ROUTES.login);
+    expect(currentLocation.textContent).toEqual(RouterPaths.login);
   });
 
   test('should display favorite offers count if authorized', () => {
@@ -92,7 +95,7 @@ describe(Header.name, () => {
         <MockRouter>
           <Routes>
             <Route path="/" element={<Header />} />
-            <Route path={ROUTES.login} element={<CurrentLocation />} />
+            <Route path={RouterPaths.login} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>
@@ -115,8 +118,8 @@ describe(Header.name, () => {
       <Provider store={store}>
         <MockRouter>
           <Routes>
-            <Route path={ROUTES.cities} element={<Header />} />
-            <Route path={ROUTES.favorites} element={<CurrentLocation />} />
+            <Route path={RouterPaths.cities} element={<Header />} />
+            <Route path={RouterPaths.favorites} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>
@@ -124,6 +127,6 @@ describe(Header.name, () => {
     const favoritesLink = screen.getByTestId('favorites-link');
     fireEvent.click(favoritesLink);
     const currentLocation = screen.getByTestId(CurrentLocation.testId);
-    expect(currentLocation.textContent).toEqual(ROUTES.favorites);
+    expect(currentLocation.textContent).toEqual(RouterPaths.favorites);
   });
 });

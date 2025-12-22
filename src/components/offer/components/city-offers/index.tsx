@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction, useCallback, useMemo } from 'react';
 import { City } from '../../../../components/city/types';
 import CardList from '../../../../components/offer/components/card-list';
 import { OfferMeta, Offer } from '../..';
-import { useSortSelectOptions } from '../sort-select/hooks/useSortSelectOptions';
+import { useSortSelectOptions } from '../sort-select/hooks/use-sort-select-options';
 import { SortSelect } from '../sort-select';
-import { comparatorBySortType } from '../../helpers/comparatorBySortType';
+import { getComparatorBySortType } from '../../helpers/get-comparator-by-sort-type';
 
 export default function CityOffers({
   city,
@@ -22,7 +22,7 @@ export default function CityOffers({
   );
 
   const comparator = useMemo(
-    () => comparatorBySortType(selectedOption.value),
+    () => getComparatorBySortType(selectedOption.value),
     [selectedOption]
   );
   const sortedOffers = useMemo(

@@ -1,8 +1,8 @@
-import LOCAL_STORAGE_KEYS from '../../constants/local-storage';
+import LocalStorageKeys from '../../constants/local-storage';
 import { isAuthData } from '../validation';
 
 export function getAuthDataFromLocalStorage() {
-  const data = localStorage.getItem(LOCAL_STORAGE_KEYS.auth);
+  const data = localStorage.getItem(LocalStorageKeys.auth);
   if (data === null) {
     return null;
   }

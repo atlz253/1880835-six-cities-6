@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createOnChangeHandler } from '../../../../utils/react/form/createOnChangeHandler';
+import { createOnChangeHandler } from '../../../../utils/react/form/create-on-change-handler';
 import { preventDefault } from '../../../../utils/event';
 import {
   isNotFoundError,
@@ -8,9 +8,9 @@ import {
 } from '../../../../config/redux/thunk';
 import { Navigate } from 'react-router-dom';
 import limits from '../../../../components/comment/components/comment-form/constants/limits';
-import ROUTES from '../../../router/constants/ROUTES';
-import { postComment } from '../../features/postComment';
-import { resetCommentPostQuery } from '../../features/resetCommentPostQuery';
+import RouterPaths from '../../../router/constants/router-paths';
+import { postComment } from '../../features/post-comment';
+import { resetCommentPostQuery } from '../../features/reset-comment-post-query';
 import { Comment } from '../../types';
 import { useCommentPostQuery } from '../../hooks/use-comment-post-query';
 import { RatingInput } from '../../../rating/components/rating-input';
@@ -52,9 +52,9 @@ export function CommentForm({ offerId }: { offerId?: string }) {
       alert(`Validation error: ${error?.cause?.message}`);
       resetCommentPostQuery();
     } else if (isUnauthorizedError(error)) {
-      return <Navigate to={ROUTES.login} />;
+      return <Navigate to={RouterPaths.login} />;
     } else if (isNotFoundError(error)) {
-      return <Navigate to={ROUTES.notFound} />;
+      return <Navigate to={RouterPaths.notFound} />;
     }
   }
 

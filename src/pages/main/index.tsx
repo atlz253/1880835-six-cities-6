@@ -6,8 +6,8 @@ import { useOffersQuery } from '../../components/offer';
 import { useCurrentCityFromParams } from '../../components/city/hooks/use-current-city-from-params';
 import { Loader } from '../../components/ui/components/loader';
 import { Navigate } from 'react-router-dom';
-import routes from '../../components/router/constants/ROUTES';
-import { setErrorMessage } from '../../components/error/features/setErrorMessage';
+import RouterPaths from '../../components/router/constants/router-paths';
+import { setErrorMessage } from '../../components/error/features/set-error-message';
 import classNames from 'classnames';
 import { useAuthCheck } from '../../components/auth/hooks/use-auth-check';
 import { Navbar } from '../../components/city/components/navbar';
@@ -44,7 +44,7 @@ export function Main() {
 
   if (isError) {
     setErrorMessage(error?.cause?.message);
-    return <Navigate to={routes.error} />;
+    return <Navigate to={RouterPaths.error} />;
   }
 
   return (

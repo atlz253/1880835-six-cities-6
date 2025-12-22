@@ -4,7 +4,7 @@ import { getEmptyState } from '../../config/redux/slice/offers/state';
 import { getFulfilledState } from '../../config/redux/thunk';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
 import { getAuthMock } from '../../components/auth/mock/get-auth-mock';
-import ROUTES from '../../components/router/constants/ROUTES';
+import RouterPaths from '../../components/router/constants/router-paths';
 import { Provider } from 'react-redux';
 import { getOffersMetaMocks } from '../../components/offer/mocks/get-offers-meta-mocks';
 import { MockAppRouter } from '../../components/router/utils/test/components';
@@ -12,7 +12,7 @@ import { MockAppRouter } from '../../components/router/utils/test/components';
 describe(Favorites.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
-  test(`should render favorites page on ${ROUTES.favorites}`, () => {
+  test(`should render favorites page on ${RouterPaths.favorites}`, () => {
     const auth = getAuthMock();
     const offers = getOffersMetaMocks();
     const store = mockStoreCreator({
@@ -21,7 +21,7 @@ describe(Favorites.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockAppRouter initialEntries={[ROUTES.favorites]} />
+        <MockAppRouter initialEntries={[RouterPaths.favorites]} />
       </Provider>
     );
     expect(screen.getByTestId('favorites-page')).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe(Favorites.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockAppRouter initialEntries={[ROUTES.favorites]} />
+        <MockAppRouter initialEntries={[RouterPaths.favorites]} />
       </Provider>
     );
     expect(screen.getByText('Nothing yet saved.')).toBeInTheDocument();

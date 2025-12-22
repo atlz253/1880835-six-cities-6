@@ -1,5 +1,5 @@
 import { ChangeEventHandler, Fragment } from 'react';
-import ratingTitles from '../../constants/ratingTitles';
+import RatingTitles from '../../constants/rating-titles';
 
 export function RatingInput({
   rating,
@@ -25,7 +25,7 @@ export function RatingInput({
           <label
             htmlFor={`${n}-stars`}
             className="reviews__rating-label form__rating-label"
-            title={ratingTitles[n]}
+            title={RatingTitles[n]}
           >
             <svg className="form__star-image" width={37} height={33}>
               <use xlinkHref="#icon-star" />

@@ -1,7 +1,7 @@
-import SORT_TYPES from '../../../components/offer/constants/SORT_TYPES';
+import SORT_TYPES from '../constants/sort-types';
 import { Offer } from '../types';
 
-export function comparatorBySortType(
+export function getComparatorBySortType(
   type: string
 ): (a: Offer, b: Offer) => number {
   switch (type) {

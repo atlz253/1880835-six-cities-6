@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ENDPOINTS from './constants/ENDPOINTS.ts';
+import ApiEndpoints from './constants/api-endpoints.ts';
 import { addTokenInterceptor } from '../redux/utils/axios/addTokenInterceptor.ts';
 import { addAlertNetworkErrorInterceptor } from './interceptors/add-alert-network-error-interceptor.ts';
 
@@ -15,6 +15,6 @@ function getApi() {
   return result;
 }
 
-export { ENDPOINTS, getApi };
+export { ApiEndpoints, getApi };
 
 export type * from './types.ts';

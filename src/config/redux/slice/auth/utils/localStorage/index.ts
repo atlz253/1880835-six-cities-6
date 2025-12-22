@@ -1,1 +1,1 @@
-export * from './getAuthDataFromLocalStorage';
+export * from './get-auth-data-from-local-storage';

@@ -1,9 +1,9 @@
-import SORT_TYPES from '../../../constants/SORT_TYPES';
+import SortTypes from '../../../constants/sort-types';
 import { Option } from '../../../../ui/hooks/use-select';
 
 export default [
-  { value: SORT_TYPES.popular, render: () => 'Popular' },
-  { value: SORT_TYPES.priceLowToHigh, render: () => 'Price: low to high' },
-  { value: SORT_TYPES.priceHighToLow, render: () => 'Price: high to low' },
-  { value: SORT_TYPES.topRatedFirst, render: () => 'Top rated first' },
+  { value: SortTypes.popular, render: () => 'Popular' },
+  { value: SortTypes.priceLowToHigh, render: () => 'Price: low to high' },
+  { value: SortTypes.priceHighToLow, render: () => 'Price: high to low' },
+  { value: SortTypes.topRatedFirst, render: () => 'Top rated first' },
 ] satisfies Option[];

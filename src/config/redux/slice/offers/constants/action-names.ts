@@ -5,4 +5,4 @@ export default {
   favoriteOffers: 'offers/favoriteOffers',
   addOfferToFavorites: 'offers/addOfferToFavorites',
   removeOfferToFavorites: 'offers/removeOfferToFavorites',
-};
+} as const;

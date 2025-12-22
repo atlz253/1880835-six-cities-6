@@ -4,4 +4,4 @@ export default {
   unauthorized: 'unauthorized',
   validationFailed: 'validationFailed',
   conflict: 'conflict',
-};
+} as const;

@@ -6,7 +6,7 @@ import {
   marker,
   Marker,
 } from 'leaflet';
-import { defaultIcon, currentIcon } from '../../leaflet/pinIcons';
+import { defaultIcon, currentIcon } from '../../leaflet/pin-icons';
 import { Position } from '../../types';
 
 const MAX_ZOOM = 19;

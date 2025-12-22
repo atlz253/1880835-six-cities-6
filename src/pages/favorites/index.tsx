@@ -2,8 +2,8 @@ import { Header } from '../../components/ui/components/header';
 import { useOffersQuery } from '../../components/offer';
 import { Loader } from '../../components/ui/components/loader';
 import { Link, Navigate } from 'react-router-dom';
-import routes from '../../components/router/constants/ROUTES';
-import { setErrorMessage } from '../../components/error/features/setErrorMessage';
+import RouterPaths from '../../components/router/constants/router-paths';
+import { setErrorMessage } from '../../components/error/features/set-error-message';
 import classNames from 'classnames';
 import { useAuthCheck } from '../../components/auth/hooks/use-auth-check';
 import { Favorites as FavoritesView } from '../../components/offer/components/favorites';
@@ -18,7 +18,7 @@ export function Favorites() {
 
   if (isError) {
     setErrorMessage(error?.cause?.message);
-    return <Navigate to={routes.error} />;
+    return <Navigate to={RouterPaths.error} />;
   }
 
   return (
@@ -35,7 +35,7 @@ export function Favorites() {
         </div>
       </main>
       <footer className="footer container">
-        <Link className="footer__logo-link" to={routes.cities}>
+        <Link className="footer__logo-link" to={RouterPaths.cities}>
           <img
             className="footer__logo"
             src="img/logo.svg"

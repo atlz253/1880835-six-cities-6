@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import { getEmptyState } from '../../../../config/redux/slice/comments/state';
 import limits from '../../../../components/comment/components/comment-form/constants/limits';
 import { CommentForm } from '.';
-import { postComment } from '../../features/postComment';
+import { postComment } from '../../features/post-comment';
 
 describe(CommentForm.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
   beforeAll(() => {
-    vi.mock('../../features/postComment', () => ({
+    vi.mock('../../features/post-comment', () => ({
       postComment: vi.fn(),
     }));
   });

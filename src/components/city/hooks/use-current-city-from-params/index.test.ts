@@ -2,12 +2,12 @@ import { renderHook } from '@testing-library/react';
 import { useCurrentCityFromParams } from '.';
 import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { useNavigate, useParams } from 'react-router-dom';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import { Mock } from 'vitest';
-import { setCurrentCity } from '../../features/setCurrentCity';
+import { setCurrentCity } from '../../features/set-current-city';
 import { getCitiesMock } from '../../mocks/get-cities-mocks';
 import { getCitiesMockState } from '../../../../config/redux/slice/cities/utils/test';
-import cityNames from '../../constants/cityNames';
+import cityNames from '../../constants/city-names';
 import { getRouterPageWrapper } from '../../../router/utils/test/components';
 
 describe(useCurrentCityFromParams.name, () => {
@@ -27,7 +27,7 @@ describe(useCurrentCityFromParams.name, () => {
       };
     });
 
-    vi.mock('../../features/setCurrentCity', () => ({
+    vi.mock('../../features/set-current-city', () => ({
       setCurrentCity: vi.fn(),
     }));
   });
@@ -42,7 +42,7 @@ describe(useCurrentCityFromParams.name, () => {
     const store = mockStoreCreator(getCitiesMockState());
     mockedUseParams.mockReturnValue({});
     renderHook(() => useCurrentCityFromParams(), {
-      wrapper: getRouterPageWrapper({ store, route: ROUTES.cities }),
+      wrapper: getRouterPageWrapper({ store, route: RouterPaths.cities }),
     });
     expect(navigateMock).not.toHaveBeenCalled();
     expect(mockedSetCurrentCity).not.toHaveBeenCalled();
@@ -53,7 +53,7 @@ describe(useCurrentCityFromParams.name, () => {
     const expectedCityToSwitch = getCitiesMock().Amsterdam;
     mockedUseParams.mockReturnValue({ city: cityNames.Amsterdam });
     renderHook(() => useCurrentCityFromParams(), {
-      wrapper: getRouterPageWrapper({ store, route: ROUTES.cities }),
+      wrapper: getRouterPageWrapper({ store, route: RouterPaths.cities }),
     });
     expect(navigateMock).not.toHaveBeenCalled();
     expect(mockedSetCurrentCity).toHaveBeenCalledWith(expectedCityToSwitch);
@@ -63,9 +63,9 @@ describe(useCurrentCityFromParams.name, () => {
     const store = mockStoreCreator(getCitiesMockState());
     mockedUseParams.mockReturnValue({ city: 'test' });
     renderHook(() => useCurrentCityFromParams(), {
-      wrapper: getRouterPageWrapper({ store, route: ROUTES.cities }),
+      wrapper: getRouterPageWrapper({ store, route: RouterPaths.cities }),
     });
     expect(mockedSetCurrentCity).not.toHaveBeenCalled();
-    expect(navigateMock).toHaveBeenCalledWith(ROUTES.notFound);
+    expect(navigateMock).toHaveBeenCalledWith(RouterPaths.notFound);
   });
 });

@@ -5,7 +5,7 @@ import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { getEmptyState } from '../../../../config/redux/slice/auth/state';
 import { Route, Routes } from 'react-router-dom';
 import { getAuthorizedStateMock } from '../../../../config/redux/slice/auth/utils/test';
-import ROUTES from '../../constants/ROUTES';
+import RouterPaths from '../../constants/router-paths';
 import { MockRouter } from '../../utils/test/components';
 
 describe(PrivateRoute.name, () => {
@@ -30,7 +30,7 @@ describe(PrivateRoute.name, () => {
                 </PrivateRoute>
               }
             />
-            <Route path={ROUTES.login} element={<div>{loginPageText}</div>} />
+            <Route path={RouterPaths.login} element={<div>{loginPageText}</div>} />
           </Routes>
         </MockRouter>
       </Provider>
@@ -53,7 +53,7 @@ describe(PrivateRoute.name, () => {
                 </PrivateRoute>
               }
             />
-            <Route path={ROUTES.login} element={<div>Login page</div>} />
+            <Route path={RouterPaths.login} element={<div>Login page</div>} />
           </Routes>
         </MockRouter>
       </Provider>

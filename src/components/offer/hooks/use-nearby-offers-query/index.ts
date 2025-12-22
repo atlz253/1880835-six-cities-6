@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '../../../../config/redux/hooks/useAppDispatch';
+import { useAppDispatch } from '../../../../config/redux/hooks/use-app-dispatch';
 import { nearbyOffersThunk } from '../../../../config/redux/slice/offers';
 import { selectNearbyOffers } from '../../../../config/redux/slice/offers/selector';
 import { ThunkQuery } from '../../../../config/redux/thunk/types';

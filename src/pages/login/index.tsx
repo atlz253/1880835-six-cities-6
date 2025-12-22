@@ -1,8 +1,8 @@
 import { Link, Navigate } from 'react-router-dom';
 import { AuthForm } from '../../components/auth/components/auth-form';
 import { useAuthQuery } from '../../components/auth/hooks/use-auth-query';
-import ROUTES from '../../components/router/constants/ROUTES';
-import { setErrorMessage } from '../../components/error/features/setErrorMessage';
+import RouterPaths from '../../components/router/constants/router-paths';
+import { setErrorMessage } from '../../components/error/features/set-error-message';
 import { isValidationError } from '../../config/redux/thunk';
 import { Loader } from '../../components/ui/components/loader';
 import { RandomCityLink } from '../../components/city/components/random-city-link';
@@ -21,12 +21,12 @@ export function Login() {
       alert(`Login validation error: ${authError?.cause?.message}`);
     } else {
       setErrorMessage(authError?.cause?.message);
-      return <Navigate to={ROUTES.error} />;
+      return <Navigate to={RouterPaths.error} />;
     }
   }
 
   if (isAuthFetched && !isAuthError) {
-    return <Navigate to={ROUTES.cities} />;
+    return <Navigate to={RouterPaths.cities} />;
   }
 
   return (
@@ -35,7 +35,7 @@ export function Login() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link className="header__logo-link" to={ROUTES.cities}>
+              <Link className="header__logo-link" to={RouterPaths.cities}>
                 <img
                   className="header__logo"
                   src="img/logo.svg"

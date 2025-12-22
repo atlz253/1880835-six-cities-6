@@ -5,31 +5,34 @@ import { getEmptyState as getEmptyCommentsState } from '../../config/redux/slice
 import { getEmptyState as getEmptyOffersState } from '../../config/redux/slice/offers/state';
 import { getFulfilledState } from '../../config/redux/thunk';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import ROUTES from '../../components/router/constants/ROUTES';
+import RouterPaths from '../../components/router/constants/router-paths';
 import { Provider } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { getAuthorizedStateMock } from '../../config/redux/slice/auth/utils/test';
 import { OfferDetails } from '../../components/offer';
 import { getPostedCommentsMock } from '../../components/comment/mocks/get-posted-comments-mock';
-import { addOfferWithIdToFavorites } from '../../components/offer/features/addOfferWithIdToFavorites';
-import { removeOfferWithIdFromFavorites } from '../../components/offer/features/removeOfferWithIdFromFavorites';
+import { addOfferWithIdToFavorites } from '../../components/offer/features/add-offer-with-id-to-favorites';
+import { removeOfferWithIdFromFavorites } from '../../components/offer/features/remove-offer-with-id-from-favorites';
 import { getOfferDetailsMock } from '../../components/offer/mocks/get-offer-details-mock';
 import { getOffersMetaMocks } from '../../components/offer/mocks/get-offers-meta-mocks';
 import { CurrentLocation } from '../../components/router/components/current-location';
-import { MockAppRouter, MockRouter } from '../../components/router/utils/test/components';
+import {
+  MockAppRouter,
+  MockRouter,
+} from '../../components/router/utils/test/components';
 
 describe(Offer.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
   beforeAll(() => {
     vi.mock(
-      '../../components/offer/features/removeOfferWithIdFromFavorites',
+      '../../components/offer/features/remove-offer-with-id-from-favorites',
       () => ({
         removeOfferWithIdFromFavorites: vi.fn(),
       })
     );
     vi.mock(
-      '../../components/offer/features/addOfferWithIdToFavorites',
+      '../../components/offer/features/add-offer-with-id-to-favorites',
       () => ({
         addOfferWithIdToFavorites: vi.fn(),
       })
@@ -40,7 +43,7 @@ describe(Offer.name, () => {
     vi.clearAllMocks();
   });
 
-  test(`should render offer page on ${ROUTES.offer({
+  test(`should render offer page on ${RouterPaths.offer({
     id: ':id',
   })}`, async () => {
     const offer = getOfferDetailsMock();
@@ -60,7 +63,7 @@ describe(Offer.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockAppRouter initialEntries={[ROUTES.offer({ id: 'test' })]} />
+        <MockAppRouter initialEntries={[RouterPaths.offer({ id: 'test' })]} />
       </Provider>
     );
     expect(await screen.findByText('Meet the host')).toBeInTheDocument();
@@ -84,10 +87,10 @@ describe(Offer.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockRouter initialEntries={[ROUTES.offer({ id: 'test' })]}>
+        <MockRouter initialEntries={[RouterPaths.offer({ id: 'test' })]}>
           <Routes>
-            <Route path={ROUTES.offer({ id: ':id' })} element={<Offer />} />
-            <Route path={ROUTES.login} element={<CurrentLocation />} />
+            <Route path={RouterPaths.offer({ id: ':id' })} element={<Offer />} />
+            <Route path={RouterPaths.login} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>
@@ -95,7 +98,7 @@ describe(Offer.name, () => {
     const favoritesButton = screen.getByTestId('favorites-button');
     fireEvent.click(favoritesButton);
     const currentLocation = screen.getByTestId(CurrentLocation.testId);
-    expect(currentLocation.textContent).toEqual(ROUTES.login);
+    expect(currentLocation.textContent).toEqual(RouterPaths.login);
   });
 
   test('should add offer to favorites on favorites button click', () => {
@@ -116,7 +119,7 @@ describe(Offer.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockAppRouter initialEntries={[ROUTES.offer({ id: 'test' })]} />
+        <MockAppRouter initialEntries={[RouterPaths.offer({ id: 'test' })]} />
       </Provider>
     );
     const favoritesButton = screen.getByTestId('favorites-button');
@@ -142,7 +145,7 @@ describe(Offer.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockAppRouter initialEntries={[ROUTES.offer({ id: 'test' })]} />
+        <MockAppRouter initialEntries={[RouterPaths.offer({ id: 'test' })]} />
       </Provider>
     );
     const favoritesButton = screen.getByTestId('favorites-button');

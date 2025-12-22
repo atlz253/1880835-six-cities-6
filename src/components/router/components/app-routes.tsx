@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import routes from '../constants/ROUTES';
+import RouterPaths from '../constants/router-paths';
 import { Login } from '../../../pages/login';
 import { Main } from '../../../pages/main';
 import { Offer } from '../../../pages/offer';
@@ -11,20 +11,20 @@ import { PrivateRoute } from './private-route';
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path={routes.login} element={<Login />} />
-      <Route path={routes.cities} element={<Main />} />
-      <Route path={routes.city({ city: ':city' })} element={<Main />} />
-      <Route path={routes.offer({ id: ':id' })} element={<Offer />} />
+      <Route path={RouterPaths.login} element={<Login />} />
+      <Route path={RouterPaths.cities} element={<Main />} />
+      <Route path={RouterPaths.city({ city: ':city' })} element={<Main />} />
+      <Route path={RouterPaths.offer({ id: ':id' })} element={<Offer />} />
       <Route
-        path={routes.favorites}
+        path={RouterPaths.favorites}
         element={
           <PrivateRoute>
             <Favorites />
           </PrivateRoute>
         }
       />
-      <Route path={routes.notFound} element={<Page404 />} />
-      <Route path={routes.error} element={<Error />} />
+      <Route path={RouterPaths.notFound} element={<Page404 />} />
+      <Route path={RouterPaths.error} element={<Error />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   );

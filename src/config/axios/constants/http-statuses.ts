@@ -4,4 +4,4 @@ export default {
   unauthorized: 401,
   notFound: 404,
   conflict: 409,
-};
+} as const;

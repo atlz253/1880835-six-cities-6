@@ -4,11 +4,11 @@ import {
   getRejectValue,
   serializeError,
 } from '../../thunk';
-import { ENDPOINTS, ValidationErrorResponse } from '../../../axios';
-import ACTION_NAMES from './constants/ACTION_NAMES';
+import { ApiEndpoints, ValidationErrorResponse } from '../../../axios';
+import ActionNames from './constants/action-names';
 import { AxiosError } from 'axios';
-import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
-import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
+import HTTPStatuses from '../../../axios/constants/http-statuses';
+import ErrorTypes from '../../thunk/constants/error-types';
 import { CommentsSliceState } from './state';
 import { PostedComment, Comment } from '../../../../components/comment/types';
 
@@ -17,7 +17,7 @@ export const offerCommentsThunk = createAppAsyncThunk<
   string | undefined,
   { comments: CommentsSliceState }
 >(
-  ACTION_NAMES.offerComments,
+  ActionNames.offerComments,
   async (
     offerID: string | undefined,
     { rejectWithValue, extra: { getApi } }
@@ -25,17 +25,17 @@ export const offerCommentsThunk = createAppAsyncThunk<
     try {
       return (
         await getApi().get<PostedComment[]>(
-          ENDPOINTS.comments(offerID as string)
+          ApiEndpoints.comments(offerID as string)
         )
       ).data;
     } catch (error) {
       if (
         error instanceof AxiosError &&
         error.response &&
-        error.response.status === HTTP_STATUS.notFound
+        error.response.status === HTTPStatuses.notFound
       ) {
         return rejectWithValue({
-          type: ERROR_TYPES.notFound,
+          type: ErrorTypes.notFound,
           cause: { message: `Comments for offer with ID ${offerID} not found` },
         });
       } else {
@@ -59,17 +59,20 @@ export const postCommentThunk = createAppAsyncThunk<
   PostedComment,
   { offerId: string; comment: Comment }
 >(
-  ACTION_NAMES.postComment,
+  ActionNames.postComment,
   async ({ offerId, comment }, { rejectWithValue, extra: { getApi } }) => {
     try {
       return (
-        await getApi().post<PostedComment>(ENDPOINTS.comments(offerId), comment)
+        await getApi().post<PostedComment>(
+          ApiEndpoints.comments(offerId),
+          comment
+        )
       ).data;
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
-        if (error.response.status === HTTP_STATUS.validationError) {
+        if (error.response.status === HTTPStatuses.validationError) {
           return rejectWithValue({
-            type: ERROR_TYPES.validationFailed,
+            type: ErrorTypes.validationFailed,
             cause: {
               message: (error.response.data as ValidationErrorResponse).details
                 .map((d) => d.messages.join())

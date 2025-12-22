@@ -1,18 +1,18 @@
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../../components/ui/components/header';
-import routes from '../../components/router/constants/ROUTES';
+import routes from '../../components/router/constants/router-paths';
 import classNames from 'classnames';
 import { Rating } from '../../components/rating/components/rating';
-import offerRatingClassNames from '../../components/offer/constants/offerRatingClassNames';
+import OfferRatingClassNames from '../../components/offer/constants/offer-rating-class-names';
 import { CommentsSection } from '../../components/comment/components/comments-section';
 import { Map } from '../../components/map';
 import { Loader } from '../../components/ui/components/loader';
-import { setErrorMessage } from '../../components/error/features/setErrorMessage';
-import ERROR_TYPES from '../../config/redux/thunk/constants/ERROR_TYPES';
+import { setErrorMessage } from '../../components/error/features/set-error-message';
+import ErrorTypes from '../../config/redux/thunk/constants/error-types';
 import { useAuthStatus } from '../../components/auth';
-import { removeOfferWithIdFromFavorites } from '../../components/offer/features/removeOfferWithIdFromFavorites';
-import { addOfferWithIdToFavorites } from '../../components/offer/features/addOfferWithIdToFavorites';
-import ROUTES from '../../components/router/constants/ROUTES';
+import { removeOfferWithIdFromFavorites } from '../../components/offer/features/remove-offer-with-id-from-favorites';
+import { addOfferWithIdToFavorites } from '../../components/offer/features/add-offer-with-id-to-favorites';
+import RouterPaths from '../../components/router/constants/router-paths';
 import { useAuthCheck } from '../../components/auth/hooks/use-auth-check';
 import CardList from '../../components/offer/components/card-list';
 import { useNearbyOffersQuery } from '../../components/offer/hooks/use-nearby-offers-query';
@@ -31,9 +31,9 @@ export function Offer() {
   const navigate = useNavigate();
   const onFavoriteButtonClick = () => {
     if (offer === undefined) {
-      navigate(ROUTES.error);
+      navigate(RouterPaths.error);
     } else if (!isAuth) {
-      navigate(ROUTES.login);
+      navigate(RouterPaths.login);
     } else if (offer.isFavorite) {
       removeOfferWithIdFromFavorites(offer.id);
     } else {
@@ -46,7 +46,7 @@ export function Offer() {
   }
 
   if (isError) {
-    if (error?.type === ERROR_TYPES.notFound) {
+    if (error?.type === ErrorTypes.notFound) {
       return <Navigate to={routes.notFound} />;
     } else {
       setErrorMessage(error?.cause?.message);
@@ -94,7 +94,7 @@ export function Offer() {
               </div>
               <Rating
                 rating={offer.rating}
-                classNames={offerRatingClassNames}
+                classNames={OfferRatingClassNames}
                 showValue
               />
               <ul className="offer__features">

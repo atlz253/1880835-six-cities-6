@@ -4,7 +4,7 @@ import { getEmptyState as getEmptyAuthState } from '../../config/redux/slice/aut
 import { getEmptyState as getEmptyCitiesState } from '../../config/redux/slice/cities/state';
 import { getFulfilledState } from '../../config/redux/thunk';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import ROUTES from '../../components/router/constants/ROUTES';
+import RouterPaths from '../../components/router/constants/router-paths';
 import { Provider } from 'react-redux';
 import { getOffersMetaMocks } from '../../components/offer/mocks/get-offers-meta-mocks';
 import { MockAppRouter } from '../../components/router/utils/test/components';
@@ -12,7 +12,7 @@ import { MockAppRouter } from '../../components/router/utils/test/components';
 describe(Main.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
-  test(`should render main page on ${ROUTES.cities}`, async () => {
+  test(`should render main page on ${RouterPaths.cities}`, async () => {
     const offers = getOffersMetaMocks();
     const store = mockStoreCreator({
       auth: getEmptyAuthState(),
@@ -21,7 +21,7 @@ describe(Main.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockAppRouter initialEntries={[ROUTES.cities]} />
+        <MockAppRouter initialEntries={[RouterPaths.cities]} />
       </Provider>
     );
     expect((await screen.findAllByText('Cities'))[0]).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe(Main.name, () => {
     });
     render(
       <Provider store={store}>
-        <MockAppRouter initialEntries={[ROUTES.cities]} />
+        <MockAppRouter initialEntries={[RouterPaths.cities]} />
       </Provider>
     );
     expect(screen.getByText('No places to stay available')).toBeInTheDocument();

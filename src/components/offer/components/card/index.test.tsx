@@ -6,21 +6,24 @@ import { Provider } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { getAuthorizedStateMock } from '../../../../config/redux/slice/auth/utils/test';
 import { OfferDetails } from '../..';
-import { addOfferWithIdToFavorites } from '../../features/addOfferWithIdToFavorites';
-import { removeOfferWithIdFromFavorites } from '../../features/removeOfferWithIdFromFavorites';
-import ROUTES from '../../../router/constants/ROUTES';
+import { addOfferWithIdToFavorites } from '../../features/add-offer-with-id-to-favorites';
+import { removeOfferWithIdFromFavorites } from '../../features/remove-offer-with-id-from-favorites';
+import RouterPaths from '../../../router/constants/router-paths';
 import { getOfferDetailsMock } from '../../mocks/get-offer-details-mock';
 import { CurrentLocation } from '../../../router/components/current-location';
-import { MockPageRouter, MockRouter } from '../../../router/utils/test/components';
+import {
+  MockPageRouter,
+  MockRouter,
+} from '../../../router/utils/test/components';
 
 describe(Card.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
   beforeAll(() => {
-    vi.mock('../../features/removeOfferWithIdFromFavorites', () => ({
+    vi.mock('../../features/remove-offer-with-id-from-favorites', () => ({
       removeOfferWithIdFromFavorites: vi.fn(),
     }));
-    vi.mock('../../features/addOfferWithIdToFavorites', () => ({
+    vi.mock('../../features/add-offer-with-id-to-favorites', () => ({
       addOfferWithIdToFavorites: vi.fn(),
     }));
   });
@@ -35,7 +38,7 @@ describe(Card.name, () => {
     render(
       <Provider store={store}>
         <MockPageRouter
-          path={ROUTES.cities}
+          path={RouterPaths.cities}
           element={<Card offer={offer} imageURL={offer.images[0]} />}
         />
       </Provider>
@@ -49,7 +52,7 @@ describe(Card.name, () => {
     render(
       <Provider store={store}>
         <MockPageRouter
-          path={ROUTES.cities}
+          path={RouterPaths.cities}
           element={<Card offer={offer} imageURL={offer.images[0]} />}
         />
       </Provider>
@@ -65,7 +68,7 @@ describe(Card.name, () => {
     render(
       <Provider store={store}>
         <MockPageRouter
-          path={ROUTES.cities}
+          path={RouterPaths.cities}
           element={<Card offer={offer} imageURL={offer.images[0]} />}
         />
       </Provider>
@@ -81,7 +84,7 @@ describe(Card.name, () => {
     render(
       <Provider store={store}>
         <MockPageRouter
-          path={ROUTES.cities}
+          path={RouterPaths.cities}
           element={<Card offer={offer} imageURL={offer.images[0]} />}
         />
       </Provider>
@@ -97,10 +100,10 @@ describe(Card.name, () => {
         <MockRouter>
           <Routes>
             <Route
-              path={ROUTES.cities}
+              path={RouterPaths.cities}
               element={<Card offer={offer} imageURL={offer.images[0]} />}
             />
-            <Route path={ROUTES.login} element={<CurrentLocation />} />
+            <Route path={RouterPaths.login} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
       </Provider>
@@ -108,6 +111,6 @@ describe(Card.name, () => {
     const favoriteButton = screen.getByTestId('favorite-button');
     fireEvent.click(favoriteButton);
     const currentLocation = screen.getByTestId(CurrentLocation.testId);
-    expect(currentLocation.textContent).toEqual(ROUTES.login);
+    expect(currentLocation.textContent).toEqual(RouterPaths.login);
   });
 });

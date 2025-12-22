@@ -1,6 +1,6 @@
 import { getPostedCommentsMock } from '../../../../components/comment/mocks/get-posted-comments-mock';
-import { ENDPOINTS } from '../../../axios';
-import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
+import { ApiEndpoints } from '../../../axios';
+import HTTPStatuses from '../../../axios/constants/http-statuses';
 import { getApiMock } from '../../../axios/utils/test/get-api-mock';
 import {
   expectFulfilledThunkValue,
@@ -23,8 +23,8 @@ describe('comments slice', () => {
       const offerId = 'test';
       const postedComments = getPostedCommentsMock();
       apiMock
-        .onGet(ENDPOINTS.comments(offerId))
-        .replyOnce(HTTP_STATUS.ok, postedComments);
+        .onGet(ApiEndpoints.comments(offerId))
+        .replyOnce(HTTPStatuses.ok, postedComments);
       await store.dispatch(offerCommentsThunk(offerId));
       expectFulfilledThunkValue({
         store: store,
@@ -39,8 +39,8 @@ describe('comments slice', () => {
       const offerId = 'test';
       const comment = getPostedCommentsMock()[0];
       apiMock
-        .onPost(ENDPOINTS.comments(offerId))
-        .replyOnce(HTTP_STATUS.ok, comment);
+        .onPost(ApiEndpoints.comments(offerId))
+        .replyOnce(HTTPStatuses.ok, comment);
       await store.dispatch(postCommentThunk({ offerId, comment }));
       expectFulfilledThunkValue({
         store: store,

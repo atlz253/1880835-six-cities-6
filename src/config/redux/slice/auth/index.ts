@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import SLICE_NAMES from '../../constants/SLICE_NAMES';
+import SliceNames from '../../constants/slice-names';
 import { getEmptyState } from './state';
 import { checkLoginThunk, loginThunk, signOutThunk } from './action';
 import {
@@ -10,7 +10,7 @@ import {
 import { getAuthDataFromLocalStorage } from './utils/localStorage';
 
 export const authSlice = createSlice({
-  name: SLICE_NAMES.auth,
+  name: SliceNames.auth,
   initialState: getEmptyState(),
   reducers: {
     restoreFromLocalStorage(state) {

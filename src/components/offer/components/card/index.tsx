@@ -1,15 +1,15 @@
 import { MouseEvent, useMemo } from 'react';
 import { capitalize } from '../../../../utils/string';
 import { Link, useNavigate } from 'react-router-dom';
-import cardRatingClassNames from '../../../../components/offer/components/card/constants/ratingClassNames';
+import CardRatingClassNames from './constants/rating-class-names';
 import classNames from 'classnames';
 import { useAuthStatus } from '../../../../components/auth';
 import { stopPropagation } from '../../../../utils/event';
 import { Offer } from '../..';
-import { addOfferWithIdToFavorites } from '../../features/addOfferWithIdToFavorites';
-import { removeOfferWithIdFromFavorites } from '../../features/removeOfferWithIdFromFavorites';
+import { addOfferWithIdToFavorites } from '../../features/add-offer-with-id-to-favorites';
+import { removeOfferWithIdFromFavorites } from '../../features/remove-offer-with-id-from-favorites';
 import { Rating } from '../../../rating/components/rating';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 
 type CardVariant = 'cities' | 'favorites';
 function cardVariant(variant: CardVariant) {
@@ -61,7 +61,7 @@ export function Card({
   const navigate = useNavigate();
   const onFavoriteButtonClick = () => {
     if (!isAuth) {
-      navigate(ROUTES.login);
+      navigate(RouterPaths.login);
     } else if (isFavorite) {
       removeOfferWithIdFromFavorites(id);
     } else {
@@ -85,7 +85,7 @@ export function Card({
           'place-card__image-wrapper'
         )}
       >
-        <Link to={ROUTES.offer({ id })}>
+        <Link to={RouterPaths.offer({ id })}>
           <img
             className="place-card__image"
             src={imageURL}
@@ -120,9 +120,9 @@ export function Card({
             </span>
           </button>
         </div>
-        <Rating rating={rating} classNames={cardRatingClassNames} />
+        <Rating rating={rating} classNames={CardRatingClassNames} />
         <h2 className="place-card__name">
-          <Link to={ROUTES.offer({ id })}>{title}</Link>
+          <Link to={RouterPaths.offer({ id })}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalize(type)}</p>
       </div>

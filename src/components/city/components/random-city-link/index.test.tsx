@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { getEmptyState } from '../../../../config/redux/slice/offers/state';
 import { getFulfilledState } from '../../../../config/redux/thunk';
 import { Route, Routes } from 'react-router-dom';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import defaultCity from '../../constants/default-city';
 import { getOffersMetaMocks } from '../../../offer/mocks/get-offers-meta-mocks';
 import { CurrentLocation } from '../../../router/components/current-location';
@@ -55,7 +55,7 @@ describe(RandomCityLink.name, () => {
           <Routes>
             <Route path="/" element={<RandomCityLink />} />
             <Route
-              path={ROUTES.city({ city: ':city' })}
+              path={RouterPaths.city({ city: ':city' })}
               element={<CurrentLocation />}
             />
           </Routes>

@@ -4,7 +4,7 @@ import { getMockStoreCreator } from '../../../../config/redux/utils/test';
 import { Provider } from 'react-redux';
 import { getCitiesMockState } from '../../../../config/redux/slice/cities/utils/test';
 import { Route, Routes } from 'react-router-dom';
-import ROUTES from '../../../router/constants/ROUTES';
+import RouterPaths from '../../../router/constants/router-paths';
 import { getCitiesMock } from '../../mocks/get-cities-mocks';
 import { CurrentLocation } from '../../../router/components/current-location';
 import { MockRouter } from '../../../router/utils/test/components';
@@ -19,7 +19,7 @@ describe(Navbar.name, () => {
         <MockRouter>
           <Routes>
             <Route
-              path={ROUTES.cities}
+              path={RouterPaths.cities}
               element={<Navbar variant="locations" />}
             />
           </Routes>
@@ -38,11 +38,11 @@ describe(Navbar.name, () => {
           <CurrentLocation />
           <Routes>
             <Route
-              path={ROUTES.cities}
+              path={RouterPaths.cities}
               element={<Navbar variant="locations" />}
             />
             <Route
-              path={ROUTES.city({ city: ':city' })}
+              path={RouterPaths.city({ city: ':city' })}
               element={<Navbar variant="locations" />}
             />
           </Routes>
@@ -52,7 +52,7 @@ describe(Navbar.name, () => {
     const parisLink = screen.getByText(cities.Paris.name);
     fireEvent.click(parisLink);
     expect(screen.getByTestId(CurrentLocation.testId)).toHaveTextContent(
-      ROUTES.city({ city: cities.Paris.name })
+      RouterPaths.city({ city: cities.Paris.name })
     );
   });
 });
