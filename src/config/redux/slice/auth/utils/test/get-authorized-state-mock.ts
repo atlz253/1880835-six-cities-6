@@ -1,4 +1,4 @@
-import { getAuthMock } from '../../../../../../domain/auth/mock/get-auth-mock';
+import { getAuthMock } from '../../../../../../components/auth/mock/get-auth-mock';
 import { getFulfilledState } from '../../../../thunk';
 import { AuthSliceState } from '../../state';
 

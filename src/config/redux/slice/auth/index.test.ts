@@ -1,5 +1,5 @@
-import { getAuthMock } from '../../../../domain/auth/mock/get-auth-mock';
-import { getCredentialsMock } from '../../../../domain/auth/mock/get-credentials-mock';
+import { getAuthMock } from '../../../../components/auth/mock/get-auth-mock';
+import { getCredentialsMock } from '../../../../components/auth/mock/get-credentials-mock';
 import { ENDPOINTS } from '../../../axios';
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import { getApiMock } from '../../../axios/utils/test';

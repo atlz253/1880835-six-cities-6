@@ -9,14 +9,14 @@ import {
 import { getEmptyState } from './state';
 import { ENDPOINTS } from '../../../axios';
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
-import { getOffersMetaMocks } from '../../../../domain/offer/mocks/get-offers-meta-mocks';
-import { getOfferDetailsMock } from '../../../../domain/offer/mocks/get-offer-details-mock';
 import { expectFulfilledThunkValue } from '../../utils/test';
-import { OfferMeta } from '../../../../domain/offer';
+import { OfferMeta } from '../../../../components/offer';
 import { getApiMock } from '../../../axios/utils/test';
 import { getMockStoreCreator } from '../../utils/test';
-import { getAuthMock } from '../../../../domain/auth/mock/get-auth-mock';
+import { getAuthMock } from '../../../../components/auth/mock/get-auth-mock';
 import { getFulfilledState } from '../../thunk';
+import { getOfferDetailsMock } from '../../../../components/offer/mocks/get-offer-details-mock';
+import { getOffersMetaMocks } from '../../../../components/offer/mocks/get-offers-meta-mocks';
 
 describe('offers slice', () => {
   const apiMock = getApiMock();

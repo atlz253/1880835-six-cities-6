@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { Login } from '.';
 import { getEmptyState as getEmptyAuthState } from '../../config/redux/slice/auth/state';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import ROUTES from '../../domain/router/constants/ROUTES';
+import ROUTES from '../../components/router/constants/ROUTES';
 import { Provider } from 'react-redux';
-import { MockAppRouter } from '../../domain/router/utils/test/components';
 import { getEmptyState as getEmptyOffersState } from '../../config/redux/slice/offers/state';
+import { MockAppRouter } from '../../components/router/utils/test/components';
 
 describe(Login.name, () => {
   const mockStoreCreator = getMockStoreCreator();

@@ -1,4 +1,4 @@
-import { OfferDetails, OfferMeta } from '../../../../domain/offer';
+import { OfferDetails, OfferMeta } from '../../../../components/offer';
 import { ThunkQuery } from '../../thunk/types';
 
 interface OffersSliceState {

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { Page404 } from '.';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import ROUTES from '../../domain/router/constants/ROUTES';
+import ROUTES from '../../components/router/constants/ROUTES';
 import { Provider } from 'react-redux';
-import { MockAppRouter } from '../../domain/router/utils/test/components';
+import { MockAppRouter } from '../../components/router/utils/test/components';
 
 describe(Page404.name, () => {
   const mockStoreCreator = getMockStoreCreator();

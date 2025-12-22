@@ -4,10 +4,10 @@ import { getEmptyState as getEmptyAuthState } from '../../config/redux/slice/aut
 import { getEmptyState as getEmptyCitiesState } from '../../config/redux/slice/cities/state';
 import { getFulfilledState } from '../../config/redux/thunk';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import { getOffersMetaMocks } from '../../domain/offer/mocks/get-offers-meta-mocks';
-import ROUTES from '../../domain/router/constants/ROUTES';
+import ROUTES from '../../components/router/constants/ROUTES';
 import { Provider } from 'react-redux';
-import { MockAppRouter } from '../../domain/router/utils/test/components';
+import { getOffersMetaMocks } from '../../components/offer/mocks/get-offers-meta-mocks';
+import { MockAppRouter } from '../../components/router/utils/test/components';
 
 describe(Main.name, () => {
   const mockStoreCreator = getMockStoreCreator();

@@ -8,7 +8,7 @@ import {
   getPendingState,
   getRejectedState,
 } from '../../thunk';
-import { PostedComment } from '../../../../domain/comment';
+import { PostedComment } from '../../../../components/comment/types';
 
 export const commentsSlice = createSlice({
   name: SLICE_NAMES.comments,

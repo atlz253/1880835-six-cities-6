@@ -1,11 +1,11 @@
 import { Link, Navigate } from 'react-router-dom';
-import { AuthForm } from '../../domain/auth/components/auth-form';
-import { useAuthQuery } from '../../domain/auth/hooks/use-auth-query';
-import ROUTES from '../../domain/router/constants/ROUTES';
-import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
+import { AuthForm } from '../../components/auth/components/auth-form';
+import { useAuthQuery } from '../../components/auth/hooks/use-auth-query';
+import ROUTES from '../../components/router/constants/ROUTES';
+import { setErrorMessage } from '../../components/error/features/setErrorMessage';
 import { isValidationError } from '../../config/redux/thunk';
-import { Loader } from '../../domain/ui/components/Loader';
-import { RandomCityLink } from '../../domain/city/components/random-city-link';
+import { Loader } from '../../components/ui/components/loader';
+import { RandomCityLink } from '../../components/city/components/random-city-link';
 
 export function Login() {
   const {

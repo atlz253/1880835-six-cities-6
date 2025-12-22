@@ -3,11 +3,11 @@ import { Favorites } from '.';
 import { getEmptyState } from '../../config/redux/slice/offers/state';
 import { getFulfilledState } from '../../config/redux/thunk';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import { getAuthMock } from '../../domain/auth/mock/get-auth-mock';
-import { getOffersMetaMocks } from '../../domain/offer/mocks/get-offers-meta-mocks';
-import ROUTES from '../../domain/router/constants/ROUTES';
+import { getAuthMock } from '../../components/auth/mock/get-auth-mock';
+import ROUTES from '../../components/router/constants/ROUTES';
 import { Provider } from 'react-redux';
-import { MockAppRouter } from '../../domain/router/utils/test/components';
+import { getOffersMetaMocks } from '../../components/offer/mocks/get-offers-meta-mocks';
+import { MockAppRouter } from '../../components/router/utils/test/components';
 
 describe(Favorites.name, () => {
   const mockStoreCreator = getMockStoreCreator();

@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { getEmptyQueryState } from '../../thunk';
-import { Auth } from '../../../../domain/auth/types';
 import { AuthSliceState } from './state';
+import { Auth } from '../../../../components/auth/types';
 
 export const selectAuthState = (s: { auth: AuthSliceState }) => s.auth;
 

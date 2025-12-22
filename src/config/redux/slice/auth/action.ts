@@ -1,4 +1,3 @@
-import { Auth, Credentials } from '../../../../domain/auth/types';
 import { ENDPOINTS, ValidationErrorResponse } from '../../../axios';
 import { selectAuthState, selectAuthToken } from './selector';
 import { resetStateAction } from '../../utils/resetState';
@@ -13,6 +12,7 @@ import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
 import LOCAL_STORAGE from './constants/local-storage';
 import { AuthSliceState } from './state';
+import { Auth, Credentials } from '../../../../components/auth/types';
 
 export const signOutThunk = createAppAsyncThunk<void>(
   ACTION_NAMES.signOut,

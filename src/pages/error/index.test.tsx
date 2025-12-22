@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { Error } from '.';
 import { getEmptyState } from '../../config/redux/slice/error/state';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import ROUTES from '../../domain/router/constants/ROUTES';
+import ROUTES from '../../components/router/constants/ROUTES';
 import { Provider } from 'react-redux';
-import { MockAppRouter } from '../../domain/router/utils/test/components';
+import { MockAppRouter } from '../../components/router/utils/test/components';
 
 describe(Error.name, () => {
   const mockStoreCreator = getMockStoreCreator();

@@ -1,8 +1,11 @@
-import { getPostedCommentsMock } from '../../../../domain/comment/mocks/get-posted-comments-mock';
+import { getPostedCommentsMock } from '../../../../components/comment/mocks/get-posted-comments-mock';
 import { ENDPOINTS } from '../../../axios';
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import { getApiMock } from '../../../axios/utils/test/get-api-mock';
-import { expectFulfilledThunkValue, getMockStoreCreator } from '../../utils/test';
+import {
+  expectFulfilledThunkValue,
+  getMockStoreCreator,
+} from '../../utils/test';
 import { offerCommentsThunk, postCommentThunk } from './action';
 import { getEmptyState } from './state';
 

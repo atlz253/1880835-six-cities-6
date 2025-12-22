@@ -1,5 +1,5 @@
 import { ENDPOINTS } from '../../../axios';
-import { OfferDetails, OfferMeta } from '../../../../domain/offer';
+import { OfferDetails, OfferMeta } from '../../../../components/offer';
 import {
   createAppAsyncThunk,
   getErrorTypeByHTTPStatus,

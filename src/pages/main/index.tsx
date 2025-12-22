@@ -1,18 +1,18 @@
-import { Offer } from '../../domain/offer/types';
-import { Header } from '../../domain/ui/components/header';
-import { Map } from '../../domain/map';
+import { Offer } from '../../components/offer/types';
+import { Header } from '../../components/ui/components/header';
+import { Map } from '../../components/map';
 import { useMemo, useState } from 'react';
-import { Navbar } from '../../domain/city/components/navbar';
-import { useOffersQuery } from '../../domain/offer';
-import { useCurrentCityFromParams } from '../../domain/city/hooks/use-current-city-from-params';
-import { useCurrentCity } from '../../domain/city/hooks/use-current-city';
-import { Loader } from '../../domain/ui/components/Loader';
+import { useOffersQuery } from '../../components/offer';
+import { useCurrentCityFromParams } from '../../components/city/hooks/use-current-city-from-params';
+import { Loader } from '../../components/ui/components/loader';
 import { Navigate } from 'react-router-dom';
-import routes from '../../domain/router/constants/ROUTES';
-import CityOffers from '../../domain/offer/components/city-offers';
-import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
-import { useAuthCheck } from '../../domain/auth/hooks/use-auth-check';
+import routes from '../../components/router/constants/ROUTES';
+import { setErrorMessage } from '../../components/error/features/setErrorMessage';
 import classNames from 'classnames';
+import { useAuthCheck } from '../../components/auth/hooks/use-auth-check';
+import { Navbar } from '../../components/city/components/navbar';
+import { useCurrentCity } from '../../components/city/hooks/use-current-city';
+import CityOffers from '../../components/offer/components/city-offers';
 
 export function Main() {
   useAuthCheck();

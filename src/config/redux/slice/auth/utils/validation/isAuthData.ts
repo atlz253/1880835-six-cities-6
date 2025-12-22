@@ -1,4 +1,4 @@
-import { Auth } from '../../../../../../domain/auth/types';
+import { Auth } from '../../../../../../components/auth/types';
 
 export function isAuthData(value: unknown): value is Auth {
   return (

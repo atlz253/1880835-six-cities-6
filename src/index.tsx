@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Router } from './domain/router/components/Router';
 import { Provider } from 'react-redux';
 import { store } from './config/redux';
-import { restoreAuthDataFromLocalStorage } from './domain/auth/features/restoreAuthDataFromLocalStorage';
+import { restoreAuthDataFromLocalStorage } from './components/auth/features/restoreAuthDataFromLocalStorage';
+import { Router } from './components/router/components/Router';
 
 restoreAuthDataFromLocalStorage();
 

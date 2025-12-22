@@ -5,35 +5,35 @@ import { getEmptyState as getEmptyCommentsState } from '../../config/redux/slice
 import { getEmptyState as getEmptyOffersState } from '../../config/redux/slice/offers/state';
 import { getFulfilledState } from '../../config/redux/thunk';
 import { getMockStoreCreator } from '../../config/redux/utils/test';
-import { getPostedCommentsMock } from '../../domain/comment/mocks/get-posted-comments-mock';
-import { getOfferDetailsMock } from '../../domain/offer/mocks/get-offer-details-mock';
-import { getOffersMetaMocks } from '../../domain/offer/mocks/get-offers-meta-mocks';
-import ROUTES from '../../domain/router/constants/ROUTES';
+import ROUTES from '../../components/router/constants/ROUTES';
 import { Provider } from 'react-redux';
-import {
-  MockAppRouter,
-  MockRouter,
-} from '../../domain/router/utils/test/components';
 import { Route, Routes } from 'react-router-dom';
-import { CurrentLocation } from '../../domain/router/components/current-location';
-import { addOfferWithIdToFavorites } from '../../domain/offer/features/addOfferWithIdToFavorites';
 import { getAuthorizedStateMock } from '../../config/redux/slice/auth/utils/test';
-import { removeOfferWithIdFromFavorites } from '../../domain/offer/features/removeOfferWithIdFromFavorites';
-import { OfferDetails } from '../../domain/offer';
+import { OfferDetails } from '../../components/offer';
+import { getPostedCommentsMock } from '../../components/comment/mocks/get-posted-comments-mock';
+import { addOfferWithIdToFavorites } from '../../components/offer/features/addOfferWithIdToFavorites';
+import { removeOfferWithIdFromFavorites } from '../../components/offer/features/removeOfferWithIdFromFavorites';
+import { getOfferDetailsMock } from '../../components/offer/mocks/get-offer-details-mock';
+import { getOffersMetaMocks } from '../../components/offer/mocks/get-offers-meta-mocks';
+import { CurrentLocation } from '../../components/router/components/current-location';
+import { MockAppRouter, MockRouter } from '../../components/router/utils/test/components';
 
 describe(Offer.name, () => {
   const mockStoreCreator = getMockStoreCreator();
 
   beforeAll(() => {
     vi.mock(
-      '../../domain/offer/features/removeOfferWithIdFromFavorites',
+      '../../components/offer/features/removeOfferWithIdFromFavorites',
       () => ({
         removeOfferWithIdFromFavorites: vi.fn(),
       })
     );
-    vi.mock('../../domain/offer/features/addOfferWithIdToFavorites', () => ({
-      addOfferWithIdToFavorites: vi.fn(),
-    }));
+    vi.mock(
+      '../../components/offer/features/addOfferWithIdToFavorites',
+      () => ({
+        addOfferWithIdToFavorites: vi.fn(),
+      })
+    );
   });
 
   beforeEach(() => {

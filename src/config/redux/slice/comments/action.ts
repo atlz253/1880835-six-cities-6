@@ -1,4 +1,3 @@
-import { Comment, PostedComment } from '../../../../domain/comment';
 import {
   createAppAsyncThunk,
   getErrorTypeByHTTPStatus,
@@ -11,6 +10,7 @@ import { AxiosError } from 'axios';
 import HTTP_STATUS from '../../../axios/constants/HTTP_STATUS';
 import ERROR_TYPES from '../../thunk/constants/ERROR_TYPES';
 import { CommentsSliceState } from './state';
+import { PostedComment, Comment } from '../../../../components/comment/types';
 
 export const offerCommentsThunk = createAppAsyncThunk<
   PostedComment[],

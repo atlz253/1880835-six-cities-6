@@ -1,22 +1,22 @@
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { Header } from '../../domain/ui/components/header';
-import routes from '../../domain/router/constants/ROUTES';
+import { Header } from '../../components/ui/components/header';
+import routes from '../../components/router/constants/ROUTES';
 import classNames from 'classnames';
-import { Rating } from '../../domain/rating/components/rating';
-import offerRatingClassNames from '../../domain/offer/constants/offerRatingClassNames';
-import { CommentsSection } from '../../domain/comment/components/comments-section';
-import { Map } from '../../domain/map';
-import { Loader } from '../../domain/ui/components/Loader';
-import { useOfferQuery } from '../../domain/offer/hooks/use-offer-query';
-import { useNearbyOffersQuery } from '../../domain/offer/hooks/use-nearby-offers-query';
-import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
-import { useAuthCheck } from '../../domain/auth/hooks/use-auth-check';
+import { Rating } from '../../components/rating/components/rating';
+import offerRatingClassNames from '../../components/offer/constants/offerRatingClassNames';
+import { CommentsSection } from '../../components/comment/components/comments-section';
+import { Map } from '../../components/map';
+import { Loader } from '../../components/ui/components/loader';
+import { setErrorMessage } from '../../components/error/features/setErrorMessage';
 import ERROR_TYPES from '../../config/redux/thunk/constants/ERROR_TYPES';
-import CardList from '../../domain/offer/components/card-list';
-import { useAuthStatus } from '../../domain/auth';
-import { removeOfferWithIdFromFavorites } from '../../domain/offer/features/removeOfferWithIdFromFavorites';
-import { addOfferWithIdToFavorites } from '../../domain/offer/features/addOfferWithIdToFavorites';
-import ROUTES from '../../domain/router/constants/ROUTES';
+import { useAuthStatus } from '../../components/auth';
+import { removeOfferWithIdFromFavorites } from '../../components/offer/features/removeOfferWithIdFromFavorites';
+import { addOfferWithIdToFavorites } from '../../components/offer/features/addOfferWithIdToFavorites';
+import ROUTES from '../../components/router/constants/ROUTES';
+import { useAuthCheck } from '../../components/auth/hooks/use-auth-check';
+import CardList from '../../components/offer/components/card-list';
+import { useNearbyOffersQuery } from '../../components/offer/hooks/use-nearby-offers-query';
+import { useOfferQuery } from '../../components/offer/hooks/use-offer-query';
 
 export function Offer() {
   useAuthCheck();

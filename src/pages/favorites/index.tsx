@@ -1,12 +1,12 @@
-import { Favorites as FavoritesView } from '../../domain/offer/components/favorites';
-import { Header } from '../../domain/ui/components/header';
-import { useOffersQuery } from '../../domain/offer';
-import { Loader } from '../../domain/ui/components/Loader';
+import { Header } from '../../components/ui/components/header';
+import { useOffersQuery } from '../../components/offer';
+import { Loader } from '../../components/ui/components/loader';
 import { Link, Navigate } from 'react-router-dom';
-import routes from '../../domain/router/constants/ROUTES';
-import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
-import { useAuthCheck } from '../../domain/auth/hooks/use-auth-check';
+import routes from '../../components/router/constants/ROUTES';
+import { setErrorMessage } from '../../components/error/features/setErrorMessage';
 import classNames from 'classnames';
+import { useAuthCheck } from '../../components/auth/hooks/use-auth-check';
+import { Favorites as FavoritesView } from '../../components/offer/components/favorites';
 
 export function Favorites() {
   useAuthCheck();
