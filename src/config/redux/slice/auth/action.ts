@@ -66,6 +66,7 @@ export const loginThunk = createAppAsyncThunk<Auth, Credentials>(
         .data;
       dispatch(resetStateAction());
       localStorage.setItem(LOCAL_STORAGE.auth, JSON.stringify(data));
+      localStorage.setItem(LOCAL_STORAGE.token, JSON.stringify(data.token));
       return data;
     } catch (error) {
       if (
