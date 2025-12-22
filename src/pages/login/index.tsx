@@ -5,21 +5,27 @@ import ROUTES from '../../domain/router/constants/ROUTES';
 import { setErrorMessage } from '../../domain/error/features/setErrorMessage';
 import { isValidationError } from '../../config/redux/thunk';
 import { Loader } from '../../domain/ui/components/Loader';
+import { RandomCityLink } from '../../domain/city/components/random-city-link';
 
 export function Login() {
-  const { isLoading, isFetched, isError, error } = useAuthQuery();
+  const {
+    isLoading: isAuthLoading,
+    isFetched: isAuthFetched,
+    isError: isAuthError,
+    error: authError,
+  } = useAuthQuery();
 
-  if (isError) {
-    if (isValidationError(error)) {
+  if (isAuthError) {
+    if (isValidationError(authError)) {
       // eslint-disable-next-line no-alert
-      alert(`Login validation error: ${error?.cause?.message}`);
+      alert(`Login validation error: ${authError?.cause?.message}`);
     } else {
-      setErrorMessage(error?.cause?.message);
+      setErrorMessage(authError?.cause?.message);
       return <Navigate to={ROUTES.error} />;
     }
   }
 
-  if (isFetched && !isError) {
+  if (isAuthFetched && !isAuthError) {
     return <Navigate to={ROUTES.cities} />;
   }
 
@@ -46,13 +52,11 @@ export function Login() {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            {isLoading ? <Loader /> : <AuthForm />}
+            {isAuthLoading ? <Loader /> : <AuthForm />}
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={ROUTES.cities}>
-                <span>Amsterdam</span>
-              </Link>
+              <RandomCityLink className="locations__item-link" />
             </div>
           </section>
         </div>
