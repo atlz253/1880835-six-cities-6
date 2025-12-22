@@ -36,6 +36,7 @@ export function useSelect({
     () =>
       options.map((option) => ({
         ...option,
+        selected: option.value === selectedOption?.value,
         render: () =>
           option.render({
             option,
