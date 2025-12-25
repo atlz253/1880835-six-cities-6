@@ -59,7 +59,7 @@ export function Card({
   );
   const isAuth = useAuthStatus();
   const navigate = useNavigate();
-  const onFavoriteButtonClick = () => {
+  const handleFavoriteButtonClick = () => {
     if (!isAuth) {
       navigate(RouterPaths.login);
     } else if (isFavorite) {
@@ -109,7 +109,7 @@ export function Card({
               .filter((e) => e !== null)
               .join(' ')}
             type="button"
-            onClick={stopPropagation(onFavoriteButtonClick)}
+            onClick={stopPropagation(handleFavoriteButtonClick)}
             data-testid="favorite-button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">

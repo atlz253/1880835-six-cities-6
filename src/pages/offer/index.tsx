@@ -29,7 +29,7 @@ export function Offer() {
     });
   const isAuth = useAuthStatus();
   const navigate = useNavigate();
-  const onFavoriteButtonClick = () => {
+  const handleFavoriteButtonClick = () => {
     if (offer === undefined) {
       navigate(RouterPaths.error);
     } else if (!isAuth) {
@@ -40,6 +40,8 @@ export function Offer() {
       addOfferWithIdToFavorites(offer.id);
     }
   };
+
+  const handleCardClick = () => window.scrollTo(0, 0);
 
   if (isLoading || offer === undefined) {
     return <Loader />;
@@ -83,7 +85,7 @@ export function Offer() {
                     offer.isFavorite ? 'offer__bookmark-button--active' : null
                   )}
                   type="button"
-                  onClick={onFavoriteButtonClick}
+                  onClick={handleFavoriteButtonClick}
                   data-testid="favorites-button"
                 >
                   <svg className="offer__bookmark-icon" width={31} height={33}>
@@ -172,7 +174,7 @@ export function Offer() {
               ) : (
                 <CardList
                   offers={nearestOffers}
-                  onCardClick={() => window.scrollTo(0, 0)}
+                  onCardClick={handleCardClick}
                 />
               )}
             </div>

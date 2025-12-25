@@ -13,7 +13,7 @@ export function Header() {
   const navigate = useNavigate();
   const { data: favoriteOffers } = useFavoriteOffersQuery();
 
-  const onSignOut = preventDefault(() => {
+  const handleSignOut = preventDefault(() => {
     signOut();
     navigate(RouterPaths.login);
   });
@@ -58,7 +58,7 @@ export function Header() {
                   </Link>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" onClick={onSignOut}>
+                  <a className="header__nav-link" onClick={handleSignOut}>
                     <span className="header__signout">Sign out</span>
                   </a>
                 </li>

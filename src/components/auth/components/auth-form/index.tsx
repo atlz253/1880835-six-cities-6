@@ -12,7 +12,7 @@ export function AuthForm() {
   });
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const onChange = createOnChangeHandler((builder) =>
+  const handleInputChange = createOnChangeHandler((builder) =>
     builder
       .addCase('email', (value) =>
         setCredentials((s) => ({ ...s, email: value }))
@@ -38,7 +38,7 @@ export function AuthForm() {
           name="email"
           placeholder="Email"
           value={credentials.email}
-          onChange={onChange}
+          onChange={handleInputChange}
           data-testid="email-input"
           required
         />
@@ -51,7 +51,7 @@ export function AuthForm() {
           name="password"
           placeholder="Password"
           value={credentials.password}
-          onChange={onChange}
+          onChange={handleInputChange}
           data-testid="password-input"
           required
         />
