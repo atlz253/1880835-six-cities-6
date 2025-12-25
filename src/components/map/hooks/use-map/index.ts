@@ -21,7 +21,9 @@ function useMapRef({
   const [leafletMap, setLeafletMap] = useState<LeafletMap>();
   const isRendered = useRef<boolean>(false);
   useEffect(() => {
-    if (!isRendered.current && containerRef.current) {
+    let isMounted = true;
+
+    if (isMounted && !isRendered.current && containerRef.current) {
       const map = initMap(containerRef.current).setView(
         [position.latitude, position.longitude],
         position.zoom
@@ -34,6 +36,10 @@ function useMapRef({
       setLeafletMap(map);
       isRendered.current = true;
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [leafletMap, containerRef, position]);
   return leafletMap;
 }
@@ -46,7 +52,9 @@ function useMapPosition({
   map?: LeafletMap;
 }) {
   useEffect(() => {
-    if (map) {
+    let isMounted = true;
+
+    if (isMounted && map) {
       const { lat, lng } = map.getCenter();
       if (position.latitude !== lat || position.longitude !== lng) {
         map.panTo({
@@ -56,6 +64,10 @@ function useMapPosition({
         map.setZoom(position.zoom);
       }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [position, map]);
 }
 
@@ -83,8 +95,16 @@ function useLeafletMarkers({
     [map, markers]
   );
   useEffect(() => {
-    result.forEach((m) => map && m?.addTo(map));
-    return () => result.forEach((m) => m?.remove());
+    let isMounted = true;
+
+    if (isMounted) {
+      result.forEach((m) => map && m?.addTo(map));
+    }
+
+    return () => {
+      isMounted = false;
+      result.forEach((m) => m?.remove());
+    };
   }, [map, result]);
   return result;
 }

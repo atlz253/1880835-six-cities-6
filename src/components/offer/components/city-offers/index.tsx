@@ -16,7 +16,7 @@ export default function CityOffers({
   setCurrentOffer: Dispatch<SetStateAction<Offer | undefined>>;
 }) {
   const { select, selectedOption } = useSortSelectOptions();
-  const onCardMouseEntry = useCallback(
+  const handleCardMouseEnter = useCallback(
     ({ offer }: { offer: OfferMeta }) => setCurrentOffer(offer),
     [setCurrentOffer]
   );
@@ -38,7 +38,7 @@ export default function CityOffers({
       </b>
       <SortSelect select={select} />
       <div className="cities__places-list places__list tabs__content">
-        <CardList offers={sortedOffers} onCardMouseEntry={onCardMouseEntry} />
+        <CardList offers={sortedOffers} onCardMouseEntry={handleCardMouseEnter} />
       </div>
     </section>
   );

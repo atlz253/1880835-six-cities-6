@@ -2,13 +2,9 @@ import { renderHook } from '@testing-library/react';
 import { useMap } from '.';
 import { getMutableRefMock } from '../../../../utils/react/test';
 import { LatLng, map, marker } from 'leaflet';
-import { Mock } from 'vitest';
 import { getPositionsMock } from '../../mocks/get-positions-mock';
 
 describe(useMap.name, () => {
-  const mockedMap = map as unknown as Mock;
-  const mockedMarker = marker as unknown as Mock;
-
   beforeAll(() => {
     vi.mock('leaflet', async () => {
       const actual = await vi.importActual<object>('leaflet');
@@ -38,7 +34,7 @@ describe(useMap.name, () => {
     const containerRef = getMutableRefMock(container);
     const position = getPositionsMock()[0];
     renderHook(() => useMap({ position, containerRef }));
-    expect(mockedMap).toHaveBeenCalled();
+    expect(vi.mocked(map)).toHaveBeenCalled();
   });
 
   test('should init markers', () => {
@@ -48,6 +44,6 @@ describe(useMap.name, () => {
     renderHook(() =>
       useMap({ position: positions[0], containerRef, markers: positions })
     );
-    expect(mockedMarker).toBeCalledTimes(positions.length);
+    expect(vi.mocked(marker)).toBeCalledTimes(positions.length);
   });
 });

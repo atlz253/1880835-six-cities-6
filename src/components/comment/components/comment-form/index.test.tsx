@@ -104,6 +104,6 @@ describe(CommentForm.name, () => {
       },
     });
     fireEvent.click(submitButton);
-    expect(postComment).toBeCalledTimes(1);
+    expect(vi.mocked(postComment)).toBeCalledTimes(1);
   });
 });

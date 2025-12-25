@@ -23,7 +23,7 @@ export function CommentForm({ offerId }: { offerId?: string }) {
   );
   const { isLoading, isError, error } = useCommentPostQuery();
 
-  const onChange = createOnChangeHandler((builder) =>
+  const handleInputChange = createOnChangeHandler((builder) =>
     builder
       .addCase('review', (value) => setComment({ ...comment, comment: value }))
       .addCase('rating', (value) =>
@@ -34,7 +34,7 @@ export function CommentForm({ offerId }: { offerId?: string }) {
       )
   );
 
-  const onSubmit = preventDefault(() => {
+  const handleFormSubmit = preventDefault(() => {
     if ([offerId, comment.comment, comment.rating].includes(undefined)) {
       throw new Error('Invalid form state');
     } else {
@@ -68,14 +68,14 @@ export function CommentForm({ offerId }: { offerId?: string }) {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <RatingInput rating={comment.rating} onChange={onChange} />
+      <RatingInput rating={comment.rating} onChange={handleInputChange} />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment.comment}
-        onChange={onChange}
+        onChange={handleInputChange}
         data-testid="comment-input"
         maxLength={limits.commentMaxCharacters}
       />
@@ -88,7 +88,7 @@ export function CommentForm({ offerId }: { offerId?: string }) {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          onClick={onSubmit}
+          onClick={handleFormSubmit}
           disabled={
             offerId === undefined ||
             comment.comment === undefined ||
