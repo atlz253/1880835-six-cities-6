@@ -89,7 +89,10 @@ describe(Offer.name, () => {
       <Provider store={store}>
         <MockRouter initialEntries={[RouterPaths.offer({ id: 'test' })]}>
           <Routes>
-            <Route path={RouterPaths.offer({ id: ':id' })} element={<Offer />} />
+            <Route
+              path={RouterPaths.offer({ id: ':id' })}
+              element={<Offer />}
+            />
             <Route path={RouterPaths.login} element={<CurrentLocation />} />
           </Routes>
         </MockRouter>
@@ -124,7 +127,7 @@ describe(Offer.name, () => {
     );
     const favoritesButton = screen.getByTestId('favorites-button');
     fireEvent.click(favoritesButton);
-    expect(addOfferWithIdToFavorites).toBeCalledTimes(1);
+    expect(vi.mocked(addOfferWithIdToFavorites)).toBeCalledTimes(1);
   });
 
   test('should remove offer from favorites on favorites button click', () => {
@@ -150,6 +153,6 @@ describe(Offer.name, () => {
     );
     const favoritesButton = screen.getByTestId('favorites-button');
     fireEvent.click(favoritesButton);
-    expect(removeOfferWithIdFromFavorites).toBeCalledTimes(1);
+    expect(vi.mocked(removeOfferWithIdFromFavorites)).toBeCalledTimes(1);
   });
 });

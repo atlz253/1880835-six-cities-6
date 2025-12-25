@@ -102,7 +102,7 @@ describe(Header.name, () => {
     );
     const signOutButton = screen.getByText('Sign out');
     fireEvent.click(signOutButton);
-    expect(signOut).toBeCalledTimes(1);
+    expect(vi.mocked(signOut)).toBeCalledTimes(1);
   });
 
   test('should navigate to favorites page on click', () => {

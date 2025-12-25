@@ -59,7 +59,7 @@ describe(Card.name, () => {
     );
     const favoriteButton = screen.getByTestId('favorite-button');
     fireEvent.click(favoriteButton);
-    expect(addOfferWithIdToFavorites).toBeCalledTimes(1);
+    expect(vi.mocked(addOfferWithIdToFavorites)).toBeCalledTimes(1);
   });
 
   test('remove offer from favorites should work', () => {
@@ -75,7 +75,7 @@ describe(Card.name, () => {
     );
     const favoriteButton = screen.getByTestId('favorite-button');
     fireEvent.click(favoriteButton);
-    expect(removeOfferWithIdFromFavorites).toBeCalledTimes(1);
+    expect(vi.mocked(removeOfferWithIdFromFavorites)).toBeCalledTimes(1);
   });
 
   test('premium label should be visible if premium offer', () => {

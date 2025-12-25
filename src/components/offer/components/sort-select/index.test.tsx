@@ -19,7 +19,7 @@ describe(SortSelect.name, () => {
     render(<SortSelect select={select} />);
     const element = screen.getByTestId('offers-sort-select');
     fireEvent.click(element);
-    expect(select.setOpen).toBeCalledTimes(1);
+    expect(vi.mocked(select.setOpen)).toBeCalledTimes(1);
   });
 
   test('should select option on click', () => {
