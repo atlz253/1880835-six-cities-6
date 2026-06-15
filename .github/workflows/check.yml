@@ -4,6 +4,7 @@ on:
       - master
   pull_request:
     branches: '*'
+  workflow_dispatch:
 
 name: Project check
 jobs:
