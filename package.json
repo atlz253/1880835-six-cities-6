@@ -5,6 +5,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
+    "postbuild": "node scripts/create-spa-fallback.cjs",
     "lint": "eslint src --ext ts,tsx",
     "preview": "vite preview",
     "test": "vitest --passWithNoTests"
@@ -43,6 +44,7 @@
     "eslint-plugin-react-refresh": "0.4.3",
     "faker": "5.5.3",
     "jsdom": "22.1.0",
+    "msw": "^2.14.6",
     "typescript": "5.2.2",
     "vite": "4.4.11",
     "vitest": "0.34.6"
@@ -57,6 +59,11 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
     ]
   }
 }
